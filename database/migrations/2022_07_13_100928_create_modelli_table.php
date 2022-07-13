@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->biginteger('marca_id')->unsigned();
             $table->foreign('marca_id')->references('id')->on('marche')->ondelete('cascade');
-            $table->string('name');
-            $table->date('anno_produzione');
-            $table->date('anno_ritiro');
+            $table->string('nome');
+            $table->year('anno_produzione');
+            $table->year('anno_ritiro')->nullable();
             $table->timestamps();
         });
     }
