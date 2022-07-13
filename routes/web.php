@@ -17,6 +17,8 @@ use App\Http\Controllers\FornitoriController;
 
 Route::get('/' , [PublicController::class , 'welcome'])->name('welcome');
 Route::get('/ricambi' , [PublicController::class , 'vistaRicambi'])->name('vistaRicambi');
+Route::get('/aggiungi/ricambio' , [PublicController::class , 'vistaAggiungiRicambi'])->name('vistaAggiungiRicambi');
+Route::post('/aggiungi/nuovo/ricambio' , [PublicController::class , 'aggiungiRicambi'])->name('aggiungiRicambi');
 
 
 

@@ -15,5 +15,6 @@
                 </div>
             @endforeach    
         </div>
+        <a href="{{route('vistaAggiungiRicambi')}}" class="btn btn-danger">Aggiungi Nuovo</a>
     </div>
 </x-layout>
