@@ -10,6 +10,8 @@ class Modello extends Model
 {
     use HasFactory;
 
+    protected $table = 'modelli';
+
     protected $fillable = [
         'marca_id',
         'nome',

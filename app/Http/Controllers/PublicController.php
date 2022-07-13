@@ -34,5 +34,24 @@ class PublicController extends Controller
         ]);
         return redirect(route('vistaRicambi'));
     }
+
+    public function vistaCategorie(){
+        $categorie = Categoria::all();
+        return view('categorie.lista' , compact('categorie'));
+    }
+
+    public function vistaAggiungiCategoria(){
+        
+        return view('categorie.form');
+    }
+
+    public function aggiungiCategoria(Request $request){
+        //dd($request->all());
+        $categoria = Categoria::create([
+            'descrizione' => $request->input('descrizione'),
+        ]);
+        return redirect(route('vistaCategorie'));
+    }
+    
     
 }

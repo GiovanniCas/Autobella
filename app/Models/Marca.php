@@ -10,7 +10,9 @@ class Marca extends Model
 {
     use HasFactory;
 
-    protected $filable = [
+    protected $table = 'marche'; 
+
+    protected $fillable = [
         'nome',
     ];
 

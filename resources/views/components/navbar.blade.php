@@ -14,6 +14,9 @@
         </li><li class="nav-item">
           <a class="nav-link" href="{{route('listaFornitori')}}">Fornitori</a>
         </li>
+        </li><li class="nav-item">
+          <a class="nav-link" href="{{route('vistaCategorie')}}">Categorie</a>
+        </li>
    
         
     </div>
