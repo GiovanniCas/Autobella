@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Ricambio;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Fornitore extends Model
 {
@@ -13,4 +14,8 @@ class Fornitore extends Model
         'ragione_sociale',
         'partita_iva',
     ];
+
+    public function ricambi(){
+        return $this->belongsTo(Ricambio::class);
+    }
 }
