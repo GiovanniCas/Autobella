@@ -10,8 +10,14 @@ class Fornitore extends Model
 {
     use HasFactory;
 
+    protected $table = 'fornitori';
+
     protected $fillable = [
         'ragione_sociale',
+        'indirizzo',
+        'comune',
+        'cap',
+        'provincia',
         'partita_iva',
     ];
 

@@ -10,7 +10,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Ricambio extends Model
 {
     use HasFactory;
-
+    
+    protected $table = 'ricambi';
+    
     protected $fillable = [
         'categoria_id',
         'fornitore_id',

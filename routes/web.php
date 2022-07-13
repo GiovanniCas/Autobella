@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\FornitoriController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,13 @@ use App\Http\Controllers\PublicController;
 */
 
 Route::get('/' , [PublicController::class , 'welcome'])->name('welcome');
+Route::get('/ricambi' , [PublicController::class , 'vistaRicambi'])->name('vistaRicambi');
+
+
+
+Route::get('/fornitori' , [FornitoriController::class , 'listaFornitori'])->name('listaFornitori');
+Route::get('/aggiungi/fornitore' , [FornitoriController::class , 'aggiungiFornitore'])->name('aggiungiFornitore');
+Route::post('/aggiungi/fornitore/invio/dati' , [FornitoriController::class , 'aggiungiNuovoFornitore'])->name('aggiungiNuovoFornitore');
 
 Auth::routes();
 
