@@ -9,12 +9,12 @@ class FornitoriController extends Controller
 {
     public function listaFornitori(){
         $fornitori = Fornitore::all();     
-        return view('fornitoriLista' , compact('fornitori'));
+        return view('fornitori.lista' , compact('fornitori'));
     }
 
     public function aggiungiFornitore(){
              
-        return view('fornitoriForm' );
+        return view('fornitori.formAggiunta' );
     }
 
     public function aggiungiNuovoFornitore(Request $request){
@@ -30,6 +30,30 @@ class FornitoriController extends Controller
 
         $fornitore->save();
 
+        return redirect(route('listaFornitori'));
+    }
+
+    public function vistaModificaFornitore(Fornitore $fornitore){
+      
+        return view('fornitori.formModifica', compact('fornitore'));
+    }
+
+    public function modificaFornitore( Fornitore $fornitore ,Request $request){
+        
+        //dd($fornitore);
+        $fornitore->ragione_sociale = $request->ragione_sociale;
+        $fornitore->indirizzo = $request->indirizzo;
+        $fornitore->comune = $request->comune;
+        $fornitore->cap = $request->cap;
+        $fornitore->provincia = $request->provincia;
+        $fornitore->partita_iva = $request->partita_iva;
+        $fornitore->save();
+        return redirect(route('listaFornitori'));
+    }
+
+    public function eliminaFornitore(Fornitore $fornitore ){
+        
+        $fornitore->delete();
         return redirect(route('listaFornitori'));
     }
 }

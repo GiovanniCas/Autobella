@@ -11,11 +11,19 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{route('vistaRicambi')}}">Ricambi</a>
-        </li><li class="nav-item">
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="{{route('listaFornitori')}}">Fornitori</a>
         </li>
-        </li><li class="nav-item">
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="{{route('vistaCategorie')}}">Categorie</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('vistaModelli')}}">Modelli</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('vistaMarche')}}">Marche</a>
         </li>
    
         

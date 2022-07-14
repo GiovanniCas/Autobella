@@ -11,6 +11,7 @@
                     <th scope="col">C.A.P.</th>
                     <th scope="col">Provincia</th>
                     <th scope="col">Partita IVA</th>
+                    <th scope="col">Azioni</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +23,20 @@
                     <td>{{$fornitore->cap}}</td>
                     <td>{{$fornitore->provincia}}</td>
                     <td>{{$fornitore->partita_iva}}</td>
+                    <td>
+                        <div class="d-flex">
+                            <form href="{{route('vistaModificaFornitore' , compact('fornitore'))}}" method="get"> 
+                                            
+                                <a href="{{route('vistaModificaFornitore' , compact('fornitore'))}}" class="btn btn-info">Modifica</a>
+                            </form>
+                            <form method="post" action="{{route('eliminaFornitore' , compact('fornitore'))}}">
+                                @method('delete')
+                                @csrf
+                                <button class="btn btn-danger">Elimina</button>
+        
+                            </form>
+                        </div>
+                    </td>
                     </tr>    
                 @endforeach    
             </tbody>

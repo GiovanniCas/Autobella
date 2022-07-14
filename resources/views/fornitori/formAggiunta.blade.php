@@ -1,5 +1,6 @@
 <x-layout>
     <div class="container">
+        <h1>Aggiungi Fornitore :</h1>
         <form action="{{route('aggiungiNuovoFornitore')}}" method ="post">
             @csrf
             <div class="mb-3">
