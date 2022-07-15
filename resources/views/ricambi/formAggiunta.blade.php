@@ -1,24 +1,8 @@
 <x-layout>
     <div class="container">
+        <h1>Aggiungi Ricambio:</h1>
         <form action="{{route('aggiungiRicambi')}}" method="post">
             @csrf
-            <div class="mb-3">
-                <label for="exampleInputFronitore" class="form-label">Fornitore:</label>
-        
-                <select name="fornitore_id" id="">
-                    @foreach($fornitori as $fornitore)
-                        <option value="{{$fornitore->id}}">{{$fornitore->ragione_sociale}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputCategoria" class="form-label">Categoria:</label>
-                <select name="categoria_id" id="">
-                    @foreach($categorie as $categoria)
-                        <option value="{{$categoria->id}}">{{$categoria->descrizione}}</option>
-                    @endforeach
-                </select>
-            </div>
             <div class="mb-3">
                 <label for="exampleInputCodice" class="form-label">Codice Pezzo:</label>
                 <input type="text" class="form-control" id="exampleInputCodice" aria-describedby="emailHelp" name="codice_pezzo">
@@ -31,7 +15,30 @@
                 <label for="exampleInputPrezzo" class="form-label">Prezzo:</label>
                 <input type="number" step="any" class="form-control" id="exampleInputPrezzo" aria-describedby="emailHelp" name="prezzo">
             </div>
-          
+            <div class="mb-3">
+                <label for="exampleInputFronitore" class="form-label">Fornitore:</label>
+                <select class="form-select" name="fornitore_id"  aria-label="Default select example" >
+                    @foreach($fornitori as $fornitore)
+                        <option value="{{$fornitore->id}}">{{$fornitore->ragione_sociale}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputCategoria" class="form-label">Categoria:</label>
+                <select class="form-select" name="categoria_id"  aria-label="Default select example" >
+                    @foreach($categorie as $categoria)
+                        <option value="{{$categoria->id}}">{{$categoria->descrizione}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputCategoria" class="form-label">Modelli Compatibili:</label>
+                <select class="form-select" name="modelli_id[]" multiple aria-label="Default select example" >
+                    @foreach($modelli as $modello)
+                        <option value="{{$modello->id}}">{{$modello->nome}}</option>
+                    @endforeach
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary">Aggiungi</button>
         </form>
     </div>

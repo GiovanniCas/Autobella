@@ -2,30 +2,57 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Modello;
 use App\Models\Ricambio;
 use App\Models\Categoria;
 use App\Models\Fornitore;
 use Illuminate\Http\Request;
+use App\Models\ModelloCompatibile;
 
 class PublicController extends Controller
 {
     public function welcome(){
+      
         return view('welcome');
     }
 
     public function vistaRicambi(){
         $ricambi = Ricambio::all();
         $fornitori = Fornitore::all();
-        return view('ricambi.lista' , compact('ricambi'))->with(compact('fornitori'));
+        //$modelli_compatibili = Ricambio::find(6)->modelli()->get();
+        
+        
+        $modelli_compatibili = [];
+        
+        foreach ($ricambi as $ricambio) {
+            $modelli = Ricambio::find($ricambio->id)->modelli()->get();
+            //dd($modelli);
+            foreach($modelli as $modello) {
+                array_push($modelli_compatibili , $modello);
+            }
+           
+            
+            // $modelli = ModelloCompatibile::where('ricambio_id' , $ricambio->id)->get();
+            // array_push($pippo , $modelli);
+            
+        }
+        
+        
+     
+        return view('ricambi.lista' , compact('ricambi'))->with(compact('fornitori'))->with(compact('modelli_compatibili'));
     }
 
     public function vistaAggiungiRicambi(){
+        
         $fornitori = Fornitore::all();
         $categorie = Categoria::all();
-        return view('ricambi.formAggiunta' , compact('fornitori'))->with(compact('categorie'));
+        $modelli = Modello::all();
+        
+        return view('ricambi.formAggiunta' , compact('fornitori'))->with(compact('categorie'))->with(compact('modelli'));
     }
 
     public function aggiungiRicambi(Request $request){
+        
         $ricambio = Ricambio::create([
             'fornitore_id' => $request->input('fornitore_id'),
             'categoria_id' => $request->input('categoria_id'),
@@ -33,6 +60,17 @@ class PublicController extends Controller
             'descrizione' => $request->input('descrizione'),
             'prezzo' => $request->input('prezzo'),
         ]);
+        $ricambio->save();
+
+        $modelli_id = $request->modelli_id;
+        
+        foreach($modelli_id as $modello_id){
+            $modello_compatibile = new ModelloCompatibile();
+            $modello_compatibile->ricambio_id = $ricambio->id;
+            $modello_compatibile->modello_id = $modello_id;
+            $modello_compatibile->save();
+        }
+        
         return redirect(route('vistaRicambi'));
     }
 

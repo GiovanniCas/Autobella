@@ -20,6 +20,7 @@
                 <label for="exampleInputFronitore" class="form-label">Fornitore:</label>
         
                 <select  name="fornitore_id" id="">
+                    <option value="{{$ricambio->fornitori->ragione_sociale}}">{{$ricambio->fornitori->ragione_sociale}}</option>
                     @foreach($fornitori as $fornitore)
                         <option value="{{$fornitore->id}}">{{$fornitore->ragione_sociale}}</option>
                     @endforeach
@@ -28,6 +29,7 @@
             <div class="mb-3">
                 <label for="exampleInputCategoria" class="form-label">Categoria:</label>
                 <select name="categoria_id" id="">
+                <option value="{{$ricambio->categorie->descrizione}}">{{$ricambio->categorie->descrizione}}</option>
                     @foreach($categorie as $categoria)
                         <option value="{{$categoria->id}}">{{$categoria->descrizione}}</option>
                     @endforeach

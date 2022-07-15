@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Modello;
 use App\Models\Categoria;
 use App\Models\Fornitore;
 use Illuminate\Database\Eloquent\Model;
@@ -22,10 +23,14 @@ class Ricambio extends Model
     ]; 
 
     public function categorie(){
-        return $this->belongsTo(Categoria::class);
+        return $this->belongsTo(Categoria::class , 'categoria_id');
     }
 
     public function fornitori(){
-        return $this->belongsTo(Fornitore::class);
+        return $this->belongsTo(Fornitore::class , 'fornitore_id');
+    }
+
+    public function modelli(){
+        return $this->belongsToMany(Modello::class );// , 'modello_ricambio'
     }
 }

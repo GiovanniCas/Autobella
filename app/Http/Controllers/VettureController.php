@@ -11,7 +11,17 @@ class VettureController extends Controller
 {
     public function vistaModelli(){
         $modelli = Modello::all();
-        return view('modelli.lista' , compact('modelli'));
+            
+        $ricambi_compatibili = [];
+        
+        foreach ($modelli as $modello) {
+            $ricambi = Modello::find($modello->id)->ricambi()->get();
+            foreach($ricambi as $ricambio){
+                array_push($ricambi_compatibili , $ricambio);
+            }           
+        }
+
+        return view('modelli.lista' , compact('modelli'))->with(compact('ricambi_compatibili'));
     }
 
     public function vistaAggiungiModello(){

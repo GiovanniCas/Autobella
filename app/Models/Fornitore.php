@@ -22,6 +22,6 @@ class Fornitore extends Model
     ];
 
     public function ricambi(){
-        return $this->belongsTo(Ricambio::class);
+        return $this->hasMany(Ricambio::class);
     }
 }

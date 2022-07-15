@@ -20,6 +20,7 @@
             <div class="mb-3">
                 <label for="exampleInputMarca" class="form-label">Marca:</label>
                 <select  name="marca_id" id="">
+                    <option value="{{$modello->marche->nome}}">{{$modello->marche->nome}}</option>
                     @foreach($marche as $marca)
                         <option value="{{$marca->id}}">{{$marca->nome}}</option>
                     @endforeach
