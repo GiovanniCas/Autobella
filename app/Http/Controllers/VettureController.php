@@ -6,13 +6,60 @@ use App\Models\Marca;
 use App\Models\Modello;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 
 class VettureController extends Controller
 {
     public function vistaModelli(){
-        $modelli = Modello::all();
-            
         $ricambi_compatibili = [];
+        
+        
+        if(empty(session('cercaMarca')) && empty(session('cercaModello'))){
+            $modelli = Modello::all();
+        }
+        
+        if(session('cercaMarca')  && empty(session('cercaModello'))){
+            
+            $cercaMarca = session('cercaMarca');
+            $marche = Marca::where('nome' , 'LIKE','%'.$cercaMarca.'%')->get();
+
+            foreach($marche as $marca){
+
+                $modelli = Modello::all()->where('marca_id' , $marca->id);
+                
+            }
+        }
+        if(session('cercaMarca')  && session('cercaModello')){
+            $cercaMarca = session('cercaMarca');
+            $cercaModello = session('cercaModello');
+            
+            $marche = Marca::where('nome' ,  'LIKE','%'.$cercaMarca.'%')->get();
+            foreach ($marche as $marca) {
+                $id = $marca->id;
+            }
+            
+            $modelli = Modello::where('nome' ,  'LIKE','%'.$cercaModello.'%')->get();
+            foreach ($modelli as $modello) {
+                    $nome = $modello->nome;
+            }
+           
+            $modelli = Modello::where('nome' ,  'LIKE','%'.$nome.'%')->where('marca_id' , $id)->get();
+        } 
+
+        if(session('cercaModello')  && empty(session('cercaMarca'))){
+            
+            $cercaModello = session('cercaModello');
+            $modelli = Modello::where('nome' , 'LIKE','%'.$cercaModello.'%')->get();
+
+            foreach($modelli as $modello){
+
+                $modelli = Modello::all()->where('nome' , $modello->nome);
+                
+            }
+        }
+        
+        
         
         foreach ($modelli as $modello) {
             $ricambi = Modello::find($modello->id)->ricambi()->get();
@@ -20,6 +67,8 @@ class VettureController extends Controller
                 array_push($ricambi_compatibili , $ricambio);
             }           
         }
+        
+            
 
         return view('modelli.lista' , compact('modelli'))->with(compact('ricambi_compatibili'));
     }

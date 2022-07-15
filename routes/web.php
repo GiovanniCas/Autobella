@@ -5,16 +5,20 @@ use App\Http\Controllers\PublicController;
 use App\Http\Controllers\VettureController;
 use App\Http\Controllers\FornitoriController;
 
-
+//parte pubblica
 Route::get('/' , [PublicController::class , 'welcome'])->name('welcome');
+Route::post('/cerca/ricambi/per/vettura' , [PublicController::class , 'cercaRicambiCompatibili'])->name('cercaRicambiCompatibili');
+
+
+
 
 //rotte per ricambi
-Route::get('/ricambi' , [PublicController::class , 'vistaRicambi'])->name('vistaRicambi');
-Route::get('/aggiungi/ricambio' , [PublicController::class , 'vistaAggiungiRicambi'])->name('vistaAggiungiRicambi');
-Route::post('/aggiungi/nuovo/ricambio' , [PublicController::class , 'aggiungiRicambi'])->name('aggiungiRicambi');
-Route::get('/modifica/ricambio/{ricambio}' , [PublicController::class , 'vistaModificaRicambio'])->name('vistaModificaRicambio');
-Route::put('/modifica/ricambio/invio/dati/{ricambio}' , [PublicController::class , 'modificaRicambio'])->name('modificaRicambio');
-Route::delete('/elimina/ricambio/{ricambio}' , [PublicController::class , 'eliminaRicambio'])->name('eliminaRicambio');
+Route::get('/ricambi' , [FornitoriController::class , 'vistaRicambi'])->name('vistaRicambi');
+Route::get('/aggiungi/ricambio' , [FornitoriController::class , 'vistaAggiungiRicambi'])->name('vistaAggiungiRicambi');
+Route::post('/aggiungi/nuovo/ricambio' , [FornitoriController::class , 'aggiungiRicambi'])->name('aggiungiRicambi');
+Route::get('/modifica/ricambio/{ricambio}' , [FornitoriController::class , 'vistaModificaRicambio'])->name('vistaModificaRicambio');
+Route::put('/modifica/ricambio/invio/dati/{ricambio}' , [FornitoriController::class , 'modificaRicambio'])->name('modificaRicambio');
+Route::delete('/elimina/ricambio/{ricambio}' , [FornitoriController::class , 'eliminaRicambio'])->name('eliminaRicambio');
 
 
 //rotte per fornitori
@@ -27,12 +31,12 @@ Route::delete('/elimina/fornitore/{fornitore}' , [FornitoriController::class , '
 
 
 //rotte per categorie
-Route::get('/categorie' , [PublicController::class , 'vistaCategorie'])->name('vistaCategorie');
-Route::get('/aggiungi/categoria' , [PublicController::class , 'vistaAggiungiCategoria'])->name('vistaAggiungiCategoria');
-Route::post('/aggiungi/categoria/invio/dati' , [PublicController::class , 'aggiungiCategoria'])->name('aggiungiCategoria');
-Route::get('/modifica/categoria/{categoria}' , [PublicController::class , 'vistaModificaCategoria'])->name('vistaModificaCategoria');
-Route::put('/modifica/categoria/invio/dati/{categoria}' , [PublicController::class , 'modificaCategoria'])->name('modificaCategoria');
-Route::delete('/elimina/categoria/{categoria}' , [PublicController::class , 'eliminaCategoria'])->name('eliminaCategoria');
+Route::get('/categorie' , [FornitoriController::class , 'vistaCategorie'])->name('vistaCategorie');
+Route::get('/aggiungi/categoria' , [FornitoriController::class , 'vistaAggiungiCategoria'])->name('vistaAggiungiCategoria');
+Route::post('/aggiungi/categoria/invio/dati' , [FornitoriController::class , 'aggiungiCategoria'])->name('aggiungiCategoria');
+Route::get('/modifica/categoria/{categoria}' , [FornitoriController::class , 'vistaModificaCategoria'])->name('vistaModificaCategoria');
+Route::put('/modifica/categoria/invio/dati/{categoria}' , [FornitoriController::class , 'modificaCategoria'])->name('modificaCategoria');
+Route::delete('/elimina/categoria/{categoria}' , [FornitoriController::class , 'eliminaCategoria'])->name('eliminaCategoria');
 
 
 //rotte per modelli
