@@ -4,6 +4,10 @@
         <form action="{{route('aggiungiRicambi')}}" method="post">
             @csrf
             <div class="mb-3">
+                <label for="exampleInputNome" class="form-label">Nome:</label>
+                <input type="text" class="form-control" id="exampleInputNome" aria-describedby="emailHelp" name="nome">
+            </div>
+            <div class="mb-3">
                 <label for="exampleInputCodice" class="form-label">Codice Pezzo:</label>
                 <input type="text" class="form-control" id="exampleInputCodice" aria-describedby="emailHelp" name="codice_pezzo">
             </div>

@@ -8,7 +8,7 @@
                         <img src="..." class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{$ricambio->codice_pezzo}}</h5>
-                            <h5 class="card-title">{{$ricambio->id}}</h5>
+                            <h5 class="card-title">{{$ricambio->nome}}</h5>
                             <h5 class="card-title">{{$ricambio->descrizione}}</h5>
                             <h5 class="card-title">${{$ricambio->prezzo}}</h5>
                             <h5 class="card-title">{{$ricambio->fornitori->ragione_sociale}}</h5>

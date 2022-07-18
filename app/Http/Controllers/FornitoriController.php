@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Marca;
+use App\Models\Modello;
 use App\Models\Ricambio;
 use App\Models\Categoria;
 use App\Models\Fornitore;
 use Illuminate\Http\Request;
+use App\Models\ModelloCompatibile;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 
 
 class FornitoriController extends Controller
@@ -65,7 +69,51 @@ class FornitoriController extends Controller
         $ricambi = Ricambio::all();
         $fornitori = Fornitore::all();
         //$modelli_compatibili = Ricambio::find(6)->modelli()->get();
-        
+        $cercaRicambio = session('cercaRicambio');
+        if(session('cercaRicambio') || session('cercaModello') || session('cercaMarca') || session('cercaAnnoProduzione')){
+            
+            $cercaModello = session('cercaModello');
+            
+            $cercaMarca = session('cercaMarca');
+            $cercaAnnoProduzione = session('cercaAnnoProduzione');
+            
+            $query_ricambio = Ricambio::query(); 
+            if($cercaRicambio){
+                $query_ricambio->where('nome' , 'LIKE','%'.$cercaRicambio.'%');
+                
+            }
+            if($cercaModello){
+               $query_ricambio->whereHas('modelli', function (Builder $query) use($cercaModello )  {
+                   $query->where('nome', 'LIKE','%'.$cercaModello.'%');
+                });
+                
+            }
+            if($cercaAnnoProduzione){
+                $query_ricambio->whereHas('modelli', function (Builder $query) use( $cercaAnnoProduzione)  {
+                    $query->where('anno_produzione', 'LIKE','%'.$cercaAnnoProduzione.'%');
+                    
+                });
+            }
+            if($cercaMarca){
+                $query_ricambio->whereHas('modelli', function (Builder $query) use( $cercaMarca){
+                    $query->whereHas('marche', function (Builder $query) use( $cercaMarca) {
+                        $query->where('nome', 'LIKE','%'.$cercaMarca.'%');
+                        
+                });
+            });
+            }
+
+            $ricambi = $query_ricambio->get();
+            // $ricambi = Ricambio::where('nome' , 'LIKE','%'.$cercaRicambio.'%')
+            //         ->whereHas('modelli', function (Builder $query) use($cercaModello , $cercaAnnoProduzione)  {
+            //             $query->where('nome', 'LIKE','%'.$cercaModello.'%')->where('anno_produzione' , $cercaAnnoProduzione);
+            //         })
+            //         ->with('modelli')->dd();
+            //     dd($ricambi);            
+       
+        }
+
+            
         
         $modelli_compatibili = [];
         
@@ -104,6 +152,7 @@ class FornitoriController extends Controller
             'codice_pezzo' => $request->input('codice_pezzo'),
             'descrizione' => $request->input('descrizione'),
             'prezzo' => $request->input('prezzo'),
+            'nome' => $request->input('nome'),
         ]);
         $ricambio->save();
 
@@ -131,6 +180,7 @@ class FornitoriController extends Controller
         $ricambio->codice_pezzo = $request->codice_pezzo;
         $ricambio->descrizione = $request->descrizione;
         $ricambio->prezzo = $request->prezzo;
+        $ricambio->nome = $request->nome;
         $ricambio->fornitore_id = $request->fornitore_id;
         $ricambio->categoria_id = $request->categoria_id;
         

@@ -17,6 +17,7 @@ class Ricambio extends Model
     protected $fillable = [
         'categoria_id',
         'fornitore_id',
+        'nome',
         'codice_pezzo',
         'descrizione',
         'prezzo',

@@ -5,6 +5,10 @@
             @method('put')
             @csrf
             <div class="mb-3">
+                <label for="exampleInputNome" class="form-label">Nome:</label>
+                <input type="text" class="form-control" id="exampleInputNome" aria-describedby="emailHelp"  value="{{$ricambio->nome}}" name="nome">
+            </div>
+            <div class="mb-3">
                 <label for="exampleInputCodice" class="form-label">Codice Pezzo:</label>
                 <input type="text" class="form-control" id="exampleInputCodice" aria-describedby="emailHelp" value="{{$ricambio->codice_pezzo}}" name="codice_pezzo">
             </div>

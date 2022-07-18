@@ -20,13 +20,18 @@ class PublicController extends Controller
     }
 
     public function cercaRicambiCompatibili(Request $request){
+        //dd($request);
         $cercaModello = $request->cercaModello;
         $cercaMarca = $request->cercaMarca;
+        $cercaRicambio = $request->cercaRicambio;
+        $cercaAnnoProduzione = $request->cercaAnnoProduzione;
 
+        session()->put('cercaRicambio' , $cercaRicambio);
+        session()->put('cercaAnnoProduzione' , $cercaAnnoProduzione);
         session()->put('cercaModello' , $cercaModello);
         session()->put('cercaMarca' , $cercaMarca);
 
-        return redirect(route('vistaModelli'));
+        return redirect(route('vistaRicambi'));
     }
 
     
