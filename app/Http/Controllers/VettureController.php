@@ -15,50 +15,8 @@ class VettureController extends Controller
     public function vistaModelli(){
  
         
-        //
-       $modelli = Modello::all();
-        // if(empty(session('cercaMarca')) && empty(session('cercaModello')) && empty(session('cercaRicambio')) && empty(session('cercaAnnoProduzione'))){
-            
-
-        // }else{
-        //     $cercaRicambio = session('cercaRicambio');
-
-        //     if(session('cercaRicambio')){
-        //         $ricambi = Ricambio::where('nome' , 'LIKE','%'.$cercaRicambio.'%')->get();
-        //         foreach($ricambi as $ricambio){
-        //             $ricambi = Ricambio::where('nome' , 'LIKE','%'.$cercaRicambio.'%')->get();
-        //         }
-                
-                
-        //     }
-        //     $q = Ricambio::query();
-        //     $cercaMarca = session('cercaMarca');
-        //     $cercaModello = session('cercaModello');
-        //     $cercaRicambio = session('cercaRicambio');
-        //     $cercaAnnoProduzione = session('cercaAnnoProduzione');
-
-        //     $marche = Marca::where('nome' , 'LIKE','%'.$cercaMarca.'%')->get();
-        //     foreach($marche as $marca){
-        //         $id = $marca->id;
-        //     }
-
-        //     $modelli = Modello::where('nome' ,  'LIKE','%'.$cercaModello.'%')->get();
-        //     foreach ($modelli as $modello) {
-        //             $nome = $modello->nome;
-        //             $anno = $modello->anno_produzione;
-        //     }
-                
-        //     $modelli = Modello::where('nome' ,  'LIKE','%'.$nome.'%')
-        //             ->where('marca_id' , $id)       
-        //             ->where('anno_produzione' , $anno)->get();       
-
-        //     foreach($modelli as $modello ){
-        //         //dd($modello->id);
-        //     } 
-        //     // $q = $q->where('nome' , 'LIKE','%'.$cercaRicambio.'%')
-
-        // }
         
+       $modelli = Modello::all();
        
         $ricambi_compatibili = [];
 
@@ -123,9 +81,10 @@ class VettureController extends Controller
     }
 
     public function aggiungiMarca(Request $request){
-        //dd($request->all());
+        //dd($request->file('img'));
         $marca = Marca::create([
             'nome' => $request->input('nome'),
+            'img' => $request->file('img')->store('public/img'),
         ]);
         return redirect(route('vistaMarche'));
     }
@@ -138,6 +97,7 @@ class VettureController extends Controller
     public function modificaMarca( Marca $marca ,Request $request){
         
         $marca->nome = $request->nome;
+        $marca->img = $request->file('img')->store('public/img');
         
         $marca->save();
         return redirect(route('vistaMarche'));

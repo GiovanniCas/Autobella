@@ -10,7 +10,7 @@
                 @foreach($marche as $marca)
                     <div class="col-12 col-sm-6 col-md-3">
                         <div class="card" style="width: 18rem;">
-                            <img src="..." class="card-img-top" alt="...">
+                            <img src="{{Storage::url($marca->img)}}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{$marca->nome}}</h5>
                                 

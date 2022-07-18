@@ -14,6 +14,7 @@ class Marca extends Model
 
     protected $fillable = [
         'nome',
+        'img',
     ];
 
     public function modelli(){
