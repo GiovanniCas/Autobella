@@ -175,7 +175,7 @@ class FornitoriController extends Controller
         return view('ricambi.formModifica', compact('ricambio'))->with(compact('fornitori'))->with(compact('categorie'));
     }
 
-    public function modificaRicambio( Ricambio $ricambio ,Request $request){
+    public function modificaRicambio( Ricambio $ricambio ,Request $request){  
         
         $ricambio->codice_pezzo = $request->codice_pezzo;
         $ricambio->descrizione = $request->descrizione;
@@ -183,6 +183,7 @@ class FornitoriController extends Controller
         $ricambio->nome = $request->nome;
         $ricambio->fornitore_id = $request->fornitore_id;
         $ricambio->categoria_id = $request->categoria_id;
+        //dd($request);
         
         $ricambio->save();
         return redirect(route('vistaRicambi'));

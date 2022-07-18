@@ -10,11 +10,22 @@
             </div>
             <div class="mb-3">
                 <label for="exampleInputProduzione" class="form-label">Anno di Produzione:</label>
-                <input type="number" class="form-control" id="exampleInputProduzione" aria-describedby="emailHelp" name="anno_produzione">
+                <select class="form-control"  name="anno_produzione">
+                    <?php
+                    for ($year = (int)date('Y'); 1900 <= $year; $year--): ?>
+                        <option value="<?=$year;?>"><?=$year;?></option>
+                    <?php endfor; ?>
+                </select>
             </div>
             <div class="mb-3">
                 <label for="exampleInputRitiro" class="form-label">Anno Ritiro Dal Commercio:</label>
-                <input type="number" class="form-control" id="exampleInputRitiro" aria-describedby="emailHelp" name="anno_ritiro">
+                <select class="form-control"  name="anno_ritiro">
+                    <option value="">Ancora in Commercio</option>
+                    <?php
+                    for ($year = (int)date('Y'); 1900 <= $year; $year--): ?>
+                        <option value="<?=$year;?>"><?=$year;?></option>
+                    <?php endfor; ?>
+                </select>
             </div>
             <div class="mb-3">
                 <label for="exampleInputMarca" class="form-label">Marca:</label>

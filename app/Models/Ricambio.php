@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Modello;
 use App\Models\Categoria;
 use App\Models\Fornitore;
+use App\Models\RicambioOrdinato;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -33,5 +34,9 @@ class Ricambio extends Model
 
     public function modelli(){
         return $this->belongsToMany(Modello::class );// , 'modello_ricambio'
+    }
+
+    public function ricambiOrdinati(){
+        return $this->hasMany(RicambioOrdinato::class);
     }
 }

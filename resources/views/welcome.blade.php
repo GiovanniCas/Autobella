@@ -2,11 +2,12 @@
     
     <h1>Tutti i ricambi in un click!</h1>
 
-    <div class=" container mt-3">
-        <div class="row">
-            <form method="post" action="{{route('cercaRicambiCompatibili')}}" class="d-flex">
+    <div class=" container mt-5">
+        <div class="row mt-5">
+            <form method="post" action="{{route('cercaRicambiCompatibili')}}" class="d-flex mt-5">
                 @csrf
-                <div class="col-md-3">
+                <div class="col-md-6 ">
+                    <h5>Marca :</h5>
                     @if(session('searchOrder'))
                         <input class="form-control me-2" type="search" placeholder="{{session()->get('cercaMarca')}}" aria-label="Search" name="cercaMarca">
                         @else
@@ -14,27 +15,15 @@
                     @endif 
                 </div>
             
-                <div class="col-md-3">
+                <div class="col-md-6">
+                    <h5>Modello :</h5>
                     @if(session('cercaModello'))
                         <input class="form-control me-2" type="search" placeholder="{{session()->get('cercaModello')}}" aria-label="Search" name="cercaModello">
                         @else
                         <input class="form-control me-2" type="search" placeholder="Inserisci Modello" aria-label="Search" style="height: 40px; width: 100%;" name="cercaModello">
                     @endif 
                 </div>
-                <div class="col-md-3">
-                    @if(session('cercaRicambio'))
-                        <input class="form-control me-2" type="search" placeholder="{{session()->get('cercaRicambio')}}" aria-label="Search" name="cercaRicambio">
-                        @else
-                        <input class="form-control me-2" type="search" placeholder="Inserisci Nome Ricambio" aria-label="Search" style="height: 40px; width: 100%;" name="cercaRicambio">
-                    @endif 
-                </div>
-                <div class="col-md-3">
-                    @if(session('cercaAnnoProduzione'))
-                        <input class="form-control me-2" type="search" placeholder="{{session()->get('cercaAnnoProduzione')}}" aria-label="Search" name="cercaAnnoProduzione">
-                        @else
-                        <input class="form-control me-2" type="search" placeholder="Inserisci AnnoProduzione" aria-label="Search" style="height: 40px; width: 100%;" name="cercaAnnoProduzione">
-                    @endif 
-                </div>
+                
                 <button class="btn btn-outline-dark my-btn" style="height: 40px;" type="submit"><i class="fa-solid fa-magnifying-glass text-dark"></i></button>
             </form>
         </div>    
