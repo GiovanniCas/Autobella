@@ -10,7 +10,7 @@
                 <input type="text" class="form-control" id="exampleInputNome" aria-describedby="emailHelp" value="{{$marca->nome}}" name="nome">
             </div>
             <div>
-            <label for="exampleInputImg" class="form-label">Immagine:</label>
+                <label for="exampleInputImg" class="form-label">Immagine:</label>
                 <input type="file" class="form-control" id="exampleInputImg" aria-describedby="emailHelp" name="img">
             </div>
           

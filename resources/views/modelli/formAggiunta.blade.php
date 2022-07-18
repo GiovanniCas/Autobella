@@ -1,7 +1,7 @@
 <x-layout>
     <div class="container">
         <h1>Aggiungi nuovo Modello</h1>
-        <form action="{{route('aggiungiModello')}}" method="post">
+        <form action="{{route('aggiungiModello')}}" method="post" enctype="multipart/form-data">
             @csrf
   
             <div class="mb-3">
@@ -34,6 +34,10 @@
                         <option value="{{$marca->id}}">{{$marca->nome}}</option>
                     @endforeach
                 </select>
+            </div>
+            <div>
+                <label for="exampleInputImg" class="form-label">Immagine:</label>
+                <input type="file" class="form-control" id="exampleInputImg" aria-describedby="emailHelp" name="img">
             </div>
           
             <button type="submit" class="btn btn-primary">Aggiungi</button>

@@ -1,7 +1,7 @@
 <x-layout>
     <div class="container">
         <h1>Modifica Modello</h1>
-        <form action="{{route('modificaModello' , compact('modello'))}}" method="post">
+        <form action="{{route('modificaModello' , compact('modello'))}}" method="post" enctype="multipart/form-data">
             @csrf
             @method('put')
   
@@ -38,6 +38,10 @@
                         <option value="{{$marca->id}}">{{$marca->nome}}</option>
                     @endforeach
                 </select>
+            </div>
+            <div>
+                <label for="exampleInputImg" class="form-label">Immagine:</label>
+                <input type="file" class="form-control" id="exampleInputImg" aria-describedby="emailHelp" name="img">
             </div>
           
             <button type="submit" class="btn btn-primary">Modifica</button>

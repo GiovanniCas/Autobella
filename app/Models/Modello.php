@@ -18,6 +18,7 @@ class Modello extends Model
         'nome',
         'anno_produzione',
         'anno_ritiro',
+        'img',
     ];
 
     public function marche(){

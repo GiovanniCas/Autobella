@@ -44,6 +44,7 @@ class VettureController extends Controller
             'nome' => $request->input('nome'),
             'anno_produzione' => $request->input('anno_produzione'),
             'anno_ritiro' => $request->input('anno_ritiro'),
+            'img' => $request->file('img')->store('public/img'),
         ]);
         return redirect(route('vistaModelli'));
     }
@@ -59,6 +60,7 @@ class VettureController extends Controller
         $modello->marca_id = $request->marca_id;
         $modello->anno_produzione = $request->anno_produzione;
         $modello->anno_ritiro = $request->anno_ritiro;
+        $modello->img = $request->file('img')->store('public/img');
         
         $modello->save();
         return redirect(route('vistaModelli'));

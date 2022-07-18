@@ -7,7 +7,7 @@
                 @foreach($modelli as $modello)
                     <div class="col-12 col-sm-6 col-md-3">
                         <div class="card" style="width: 18rem;">
-                            <img src="..." class="card-img-top" alt="...">
+                            <img src="{{Storage::url($modello->img)}}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{$modello->anno_produzione}}</h5>
                                 <h5 class="card-title">{{$modello->anno_ritiro}}</h5>
