@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Modello;
+use App\Models\Immagine;
 use App\Models\Categoria;
 use App\Models\Fornitore;
 use App\Models\RicambioOrdinato;
@@ -38,5 +39,9 @@ class Ricambio extends Model
 
     public function ricambiOrdinati(){
         return $this->hasMany(RicambioOrdinato::class);
+    }
+
+    public function immagini(){
+        return $this->hasMany(Immagine::class);
     }
 }

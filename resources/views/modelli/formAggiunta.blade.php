@@ -28,9 +28,9 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label for="exampleInputMarca" class="form-label">Marca:</label>
-                <select name="marca_id" id="">
-                    @foreach($marche as $marca)
+                <label for="exampleInputCategoria" class="form-label">Marca:</label>
+                <select class="form-select" name="marca_id"  aria-label="Default select example" >
+                @foreach($marche as $marca)
                         <option value="{{$marca->id}}">{{$marca->nome}}</option>
                     @endforeach
                 </select>

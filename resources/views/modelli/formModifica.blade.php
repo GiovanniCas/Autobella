@@ -30,13 +30,14 @@
                 </select>
                 <!-- <input type="date" class="form-control" id="exampleInputRitiro" aria-describedby="emailHelp" value="{{$modello->anno_ritiro}}" name="anno_ritiro"> -->
             </div>
+          
             <div class="mb-3">
-                <label for="exampleInputMarca" class="form-label">Marca:</label>
-                <select  name="marca_id" id="">
-                    <option value="{{$modello->marche->id}}">{{$modello->marche->nome}}</option>
-                    @foreach($marche as $marca)
-                        <option value="{{$marca->id}}">{{$marca->nome}}</option>
-                    @endforeach
+                <label for="exampleInputCategoria" class="form-label">Marca:</label>
+                    <select class="form-select" name="marca_id"  aria-label="Default select example" >
+                        <option value="{{$modello->marche->id}}">{{$modello->marche->nome}}</option>
+                        @foreach($marche as $marca)
+                            <option value="{{$marca->id}}">{{$marca->nome}}</option>
+                        @endforeach 
                 </select>
             </div>
             <div>

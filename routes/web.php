@@ -1,18 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PublicController;
-use App\Http\Controllers\VettureController;
-use App\Http\Controllers\FornitoriController;
+use App\Http\Controllers\Frontend\PublicController;
+use App\Http\Controllers\Backend\VettureController;
+use App\Http\Controllers\Backend\FornitoriController;
 
 //parte pubblica
-Route::get('/' , [PublicController::class , 'welcome'])->name('welcome');
-Route::post('/cerca/ricambi/per/vettura' , [PublicController::class , 'cercaRicambiCompatibili'])->name('cercaRicambiCompatibili');
-Route::get('/carrello' , [PublicController::class , 'carrello'])->name('carrello');
-Route::post('/aggiungi/al/carrello' , [PublicController::class , "aggiungiAlCarrello"])->name("aggiungiAlCarrello");
-Route::put('/modifica/quantita/carrello' , [PublicController::class , "modificaQuantitaDesiderate"])->name("modificaQuantitaDesiderate");
-Route::get('/ordine' , [PublicController::class , "ordine"])->name("ordine");
-Route::post('/conferma/ordine' , [PublicController::class , "confermaOrdine"])->name("confermaOrdine");
+Route::prefix('/public')->group(function () {
+    
+    Route::get('/' , [PublicController::class , 'welcome'])->name('welcome');
+    Route::post('/cerca/ricambi/per/vettura' , [PublicController::class , 'cercaRicambiCompatibili'])->name('cercaRicambiCompatibili');
+    Route::get('/carrello' , [PublicController::class , 'carrello'])->name('carrello');
+    Route::post('/aggiungi/al/carrello' , [PublicController::class , "aggiungiAlCarrello"])->name("aggiungiAlCarrello");
+    Route::put('/modifica/quantita/carrello' , [PublicController::class , "modificaQuantitaDesiderate"])->name("modificaQuantitaDesiderate");
+    Route::get('/ordine' , [PublicController::class , "ordine"])->name("ordine");
+    Route::post('/conferma/ordine' , [PublicController::class , "confermaOrdine"])->name("confermaOrdine");
+    Route::get('/vista/dettaglio/{ricambio}' , [PublicController::class , "vistaDettaglio"])->name("vistaDettaglio");
+});
 
 
 

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
 use App\Models\Marca;
 use App\Models\Modello;
 use App\Models\Testata;
+use App\Models\Immagine;
 use App\Models\Ricambio;
 use App\Models\Categoria;
 use App\Models\Fornitore;
@@ -137,6 +138,24 @@ class PublicController extends Controller
         return redirect(route('welcome'));
     }
        
+
+    public function vistaDettaglio(Ricambio $ricambio){
+        
+        $immagini = Immagine::where('ricambio_id' , $ricambio->id)->get();
+
+        $modelli_compatibili = [];
+        
+        
+            $modelli = Ricambio::find($ricambio->id)->modelli()->get();
+            foreach($modelli as $modello) {
+                array_push($modelli_compatibili , $modello);
+            }
+            
+        
+        
+        return view('ricambi.vistaDettaglio' , compact('ricambio'))->with(compact('immagini'))
+                ->with(compact('modelli_compatibili'));
+    }
 
     
     

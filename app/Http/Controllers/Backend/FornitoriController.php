@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
 use App\Models\Marca;
 use App\Models\Modello;
+use App\Models\Immagine;
 use App\Models\Ricambio;
 use App\Models\Categoria;
 use App\Models\Fornitore;
 use Illuminate\Http\Request;
 use App\Models\ModelloCompatibile;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
 
 
@@ -66,6 +68,7 @@ class FornitoriController extends Controller
     }
 
     public function vistaRicambi(){
+        $immagini = Immagine::all();
         $ricambi = Ricambio::all();
         $fornitori = Fornitore::all();
         //$modelli_compatibili = Ricambio::find(6)->modelli()->get();
@@ -104,13 +107,7 @@ class FornitoriController extends Controller
             }
 
             $ricambi = $query_ricambio->get();
-            // $ricambi = Ricambio::where('nome' , 'LIKE','%'.$cercaRicambio.'%')
-            //         ->whereHas('modelli', function (Builder $query) use($cercaModello , $cercaAnnoProduzione)  {
-            //             $query->where('nome', 'LIKE','%'.$cercaModello.'%')->where('anno_produzione' , $cercaAnnoProduzione);
-            //         })
-            //         ->with('modelli')->dd();
-            //     dd($ricambi);            
-       
+        
         }
 
             
@@ -132,7 +129,8 @@ class FornitoriController extends Controller
         
         
      
-        return view('ricambi.lista' , compact('ricambi'))->with(compact('fornitori'))->with(compact('modelli_compatibili'));
+        return view('ricambi.lista' , compact('ricambi'))->with(compact('fornitori'))->with(compact('modelli_compatibili'))
+                ->with(compact('immagini'));
     }
 
     public function vistaAggiungiRicambi(){
@@ -165,6 +163,31 @@ class FornitoriController extends Controller
             $modello_compatibile->save();
         }
         
+        
+        $immagini = $request->immagini;
+        if($immagini){
+
+            foreach($immagini as $immagine){
+                
+                $img = new Immagine();
+                $img->ricambio_id = $ricambio->id;
+                $img->save();
+                
+                
+                $nome_img = $img->ricambio_id.'.img';
+                $img->nome = $nome_img;
+                
+                $img->save();
+                
+             
+                
+                $destinationPath = 'storage/img/';
+                
+                $immagine->move($destinationPath, $nome_img);
+              
+            }
+            
+        }
         return redirect(route('vistaRicambi'));
     }
 

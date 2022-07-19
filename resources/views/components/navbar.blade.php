@@ -19,13 +19,13 @@
       <li class="nav-item">
         <a class="nav-link" href="{{route('vistaMarche')}}">Marche</a>
       </li>
-      <li class="nav-item">
-          <a class="nav-link" href="{{route('carrello')}}"><i class="fa-solid fa-cart-shopping"></i></a>
-        </li>
       @guest
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('login')}}">Login</a>
-      </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('carrello')}}"><i class="fa-solid fa-cart-shopping"></i></a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('login')}}">Login</a>
+        </li>
       @endguest
       @if(Auth::user())
         <li class="nav-item">
@@ -38,9 +38,7 @@
               @csrf
           </form>
         </li>
-        @endif
-   
-        
+      @endif
     </div>
   </div>
 </nav>

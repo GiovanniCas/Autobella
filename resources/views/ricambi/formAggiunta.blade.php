@@ -1,7 +1,7 @@
 <x-layout>
     <div class="container">
         <h1>Aggiungi Ricambio:</h1>
-        <form action="{{route('aggiungiRicambi')}}" method="post">
+        <form action="{{route('aggiungiRicambi')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="exampleInputNome" class="form-label">Nome:</label>
@@ -43,6 +43,10 @@
                     @endforeach
                 </select>
             </div>
+            <label for="exampleInputImg" class="form-label">Immagini:</label>
+            <input type="file" class="form-control" name="immagini[]" placeholder="Aggiungi qui le tue Immagini" multiple> 
+            </div>
+          
             <button type="submit" class="btn btn-primary">Aggiungi</button>
         </form>
     </div>
