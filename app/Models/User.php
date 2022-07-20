@@ -23,6 +23,8 @@ class User extends Authenticatable
         'password',
     ];
 
+    const GESTORE = 1;
+
     /**
      * The attributes that should be hidden for serialization.
      *

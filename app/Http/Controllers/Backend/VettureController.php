@@ -8,6 +8,7 @@ use App\Models\Ricambio;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 
 
 class VettureController extends Controller
@@ -33,12 +34,21 @@ class VettureController extends Controller
     }
 
     public function vistaAggiungiModello(){
+
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+
         $marche = Marca::all();
         return view('modelli.formAggiunta' , compact('marche'));
     }
 
     public function aggiungiModello(Request $request){
-        //dd($request->all());
+        
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+
         $categoria = Modello::create([
             'marca_id' => $request->input('marca_id'),
             'nome' => $request->input('nome'),
@@ -50,12 +60,21 @@ class VettureController extends Controller
     }
 
     public function vistaModificaModello(Modello $modello){
+
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+
         $marche = Marca::all();
         return view('modelli.formModifica', compact('modello'))->with(compact('marche'));
     }
 
     public function modificaModello( Modello $modello ,Request $request){
         
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+
         $modello->nome = $request->nome;
         $modello->marca_id = $request->marca_id;
         $modello->anno_produzione = $request->anno_produzione;
@@ -63,10 +82,15 @@ class VettureController extends Controller
         $modello->img = $request->file('img')->store('public/img');
         
         $modello->save();
+
         return redirect(route('vistaModelli'));
     }
 
     public function eliminaModello(Modello $modello ){
+
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
         
         $modello->delete();
         return redirect(route('vistaModelli'));
@@ -78,12 +102,20 @@ class VettureController extends Controller
     }
 
     public function vistaAggiungiMarca(){
+
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
         
         return view('marche.formAggiunta');
     }
 
     public function aggiungiMarca(Request $request){
-        //dd($request->file('img'));
+        
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+
         $marca = Marca::create([
             'nome' => $request->input('nome'),
             'img' => $request->file('img')->store('public/img'),
@@ -92,11 +124,19 @@ class VettureController extends Controller
     }
 
     public function vistaModificaMarca(Marca $marca){
+
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
       
         return view('marche.formModifica', compact('marca'));
     }
 
     public function modificaMarca( Marca $marca ,Request $request){
+
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
         
         $marca->nome = $request->nome;
         $marca->img = $request->file('img')->store('public/img');
@@ -106,6 +146,10 @@ class VettureController extends Controller
     }
 
     public function eliminaMarca(Marca $marca ){
+
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
         
         $marca->delete();
         return redirect(route('vistaMarche'));

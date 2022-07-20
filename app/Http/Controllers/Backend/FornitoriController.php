@@ -11,6 +11,7 @@ use App\Models\Fornitore;
 use Illuminate\Http\Request;
 use App\Models\ModelloCompatibile;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -18,17 +19,25 @@ use Illuminate\Database\Eloquent\Builder;
 class FornitoriController extends Controller
 {
     public function listaFornitori(){
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
         $fornitori = Fornitore::all();     
         return view('fornitori.lista' , compact('fornitori'));
     }
 
     public function aggiungiFornitore(){
-             
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
         return view('fornitori.formAggiunta' );
     }
 
     public function aggiungiNuovoFornitore(Request $request){
-        //dd($request->all());
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+
         $fornitore = Fornitore::create([
             'ragione_sociale' => $request->input('ragione_sociale'),
             'indirizzo' => $request->input('indirizzo'),
@@ -44,13 +53,19 @@ class FornitoriController extends Controller
     }
 
     public function vistaModificaFornitore(Fornitore $fornitore){
-      
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+
         return view('fornitori.formModifica', compact('fornitore'));
     }
 
     public function modificaFornitore( Fornitore $fornitore ,Request $request){
         
-        //dd($fornitore);
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+
         $fornitore->ragione_sociale = $request->ragione_sociale;
         $fornitore->indirizzo = $request->indirizzo;
         $fornitore->comune = $request->comune;
@@ -62,7 +77,9 @@ class FornitoriController extends Controller
     }
 
     public function eliminaFornitore(Fornitore $fornitore ){
-        
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
         $fornitore->delete();
         return redirect(route('listaFornitori'));
     }
@@ -129,7 +146,11 @@ class FornitoriController extends Controller
     }
 
     public function vistaAggiungiRicambi(){
-        
+
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+
         $fornitori = Fornitore::all();
         $categorie = Categoria::all();
         $modelli = Modello::all();
@@ -139,6 +160,10 @@ class FornitoriController extends Controller
 
     public function aggiungiRicambi(Request $request){
         
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+
         $ricambio = Ricambio::create([
             'fornitore_id' => $request->input('fornitore_id'),
             'categoria_id' => $request->input('categoria_id'),
@@ -187,6 +212,11 @@ class FornitoriController extends Controller
     }
 
     public function vistaModificaRicambio(Ricambio $ricambio){
+
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+
         $fornitori = Fornitore::all();
         $categorie = Categoria::all();
       
@@ -194,6 +224,10 @@ class FornitoriController extends Controller
     }
 
     public function modificaRicambio( Ricambio $ricambio ,Request $request){  
+
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
         
         $ricambio->codice_pezzo = $request->codice_pezzo;
         $ricambio->descrizione = $request->descrizione;
@@ -207,6 +241,10 @@ class FornitoriController extends Controller
     }
 
     public function eliminaRicambio(Ricambio $ricambio ){
+
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
         
         $ricambio->delete();
         return redirect(route('vistaRicambi'));
@@ -219,10 +257,19 @@ class FornitoriController extends Controller
 
     public function vistaAggiungiCategoria(){
         
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+
         return view('categorie.formAggiunta');
     }
 
     public function aggiungiCategoria(Request $request){
+
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+
         $categoria = Categoria::create([
             'descrizione' => $request->input('descrizione'),
             'img' => $request->file('img')->store('public/img'),
@@ -232,12 +279,20 @@ class FornitoriController extends Controller
     }
 
     public function vistaModificaCategoria(Categoria $categoria){
-      
+        
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+
         return view('categorie.formModifica', compact('categoria'));
     }
 
     public function modificaCategoria( Categoria $categoria ,Request $request){
-       
+        
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+
         $categoria->descrizione = $request->descrizione;
         $categoria->img = $request->file('img')->store('public/img');
     
@@ -246,6 +301,10 @@ class FornitoriController extends Controller
     }
 
     public function eliminaCategoria(Categoria $categoria ){
+        
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
         
         $categoria->delete();
         return redirect(route('vistaCategorie'));
