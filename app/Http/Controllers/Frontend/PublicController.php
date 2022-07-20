@@ -77,7 +77,7 @@ class PublicController extends Controller
             }
         }
         
-        return redirect(route('carrello'));
+        return redirect(route('vistaRicambi'));
     }
 
 
@@ -109,7 +109,8 @@ class PublicController extends Controller
     }
 
     public function ordine(){
-        return view('ordine');
+        $ricambi = RicambioOrdinato::where('testata_id' , session('testata_id'))->get();
+        return view('ordine' , compact('ricambi'));
     }
         
     public function confermaOrdine(Request $request){
@@ -130,7 +131,10 @@ class PublicController extends Controller
             'cap' => $request->input('cap'),
             'email' => $request->input('email'),
             'totale' => $totale,
+            'stato' => 1,
+            'data' => date("Y-m-d"),
         ]);  
+
         
         session()->flush();
         
@@ -141,34 +145,30 @@ class PublicController extends Controller
 
     public function vistaDettaglio(Ricambio $ricambio){
        
-       $visti_di_recente = [];
-       dd($visti_di_recente);
-       //array_push($visti_di_recente , $ricambio->id);
-                
-
+        $visti_di_recente = [];
+        array_push($visti_di_recente , $ricambio->id);
+       
         if(empty(session('visti_di_recente'))){
-            
+           
             session()->put('visti_di_recente' , $visti_di_recente);
             
         }else{
-            
-            if(!in_array($ricambio->id , session('visti_di_recente'))){
+
+           //dd(session('visti_di_recente'));
+            if(!in_array($ricambio->id ,  session('visti_di_recente'))){
                 session()->push('visti_di_recente' , $ricambio->id);
             }
-
-            $visti_di_recente = array_slice(session('visti_di_recente') , -5 , 4);
-        
         }
+        $visti_di_recente = array_slice(session('visti_di_recente') , -5 , 4);
       
         $immagini = Immagine::where('ricambio_id' , $ricambio->id)->get();
 
         $modelli_compatibili = [];
-        
-        
-            $modelli = Ricambio::find($ricambio->id)->modelli()->get();
-            foreach($modelli as $modello) {
-                array_push($modelli_compatibili , $modello);
-            }
+               
+        $modelli = Ricambio::find($ricambio->id)->modelli()->get();
+        foreach($modelli as $modello) {
+            array_push($modelli_compatibili , $modello);
+        }
      
         return view('ricambi.vistaDettaglio' , compact('ricambio'))->with(compact('immagini'))
                 ->with(compact('visti_di_recente'))

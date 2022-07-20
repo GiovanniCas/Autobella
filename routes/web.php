@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Frontend\PublicController;
+use App\Http\Controllers\Backend\OrdiniController;
 use App\Http\Controllers\Backend\VettureController;
+use App\Http\Controllers\Frontend\PublicController;
 use App\Http\Controllers\Backend\FornitoriController;
 
 //parte pubblica
@@ -64,6 +65,11 @@ Route::prefix('/admin')->group(function () {
     Route::get('/modifica/marca/{marca}' , [VettureController::class , 'vistaModificaMarca'])->name('vistaModificaMarca');
     Route::put('/modifica/marca/invio/dati/{marca}' , [VettureController::class , 'modificaMarca'])->name('modificaMarca');
     Route::delete('/elimina/marca/{marca}' , [VettureController::class , 'eliminaMarca'])->name('eliminaMarca');
+
+
+    //rotte per ordini
+    Route::get('/lista/ordini' , [OrdiniController::class , 'listaOrdini'])->name('listaOrdini');
+    Route::put('/ordine/spedito/{ordine}' , [OrdiniController::class , 'ordineSpedito'])->name('ordineSpedito');
 
 
     Auth::routes();

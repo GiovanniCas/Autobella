@@ -46,11 +46,12 @@
     </div>
     @guest
         <div class="container">
-            <form action="{{route('aggiungiAlCarrello')}}" method="post" >
-                @csrf   
-                <div class="row">
-                    @foreach($ricambi as $ricambio)
-                    <div class="col-12 col-sm-6 col-md-3">
+            @csrf   
+            <div class="row">
+                @foreach($ricambi as $ricambio)
+                <div class="col-12 col-sm-6 col-md-3">
+                    <form action="{{route('aggiungiAlCarrello')}}" method="post" >
+                        @csrf
                         <div class="card mt-3" style="width: 18rem;">
                             @if($ricambio->trovaImmagine())
                                     <img src="/storage/img/{{$ricambio->trovaImmagine()->nome}}" class="d-block w-100" alt="...">
@@ -65,19 +66,27 @@
                                 <h5 class="card-title">{{$ricambio->fornitori->ragione_sociale}}</h5>
                                 <h5 class="card-title">{{$ricambio->categorie->descrizione}}</h5>
                                 <!-- Button trigger modal -->
+
                                 <a class="btn btn-primary" href="{{route('vistaDettaglio' , compact('ricambio'))}}">
                                     Vai al Dettaglio
                                 </a>
                                 
                             </div>
-                                <label for="inputQuantity">Quantita :</label>
-                                <input type="number" min="0" name="quantita[{{$ricambio->id}}]" >
+                            <div class="d-flex justify-content-between">
+                                <div style="width: 80%;">
+                                    <label for="inputQuantity">Quantita :</label>
+                                    <input type="number" min="0" name="quantita[{{$ricambio->id}}]" >
+                                </div>
+                                <div style="width: 80%;" class="d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-info" style="margin-top: 21px; height: 34px;"><i class="fa-solid fa-cart-shopping"></i></button>
+                                </div>
                             </div>
                         </div>
-                    @endforeach    
-                    <button type="submit" class="btn btn-info mt-5">Aggiungi al carrello</button>
+                    </form>
+                    
                 </div>
-            </form>
+                @endforeach    
+            </div>
         </div>
     @endguest
 

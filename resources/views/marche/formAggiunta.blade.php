@@ -6,11 +6,11 @@
   
             <div class="mb-3">
                 <label for="exampleInputNome" class="form-label">Nome:</label>
-                <input type="text" class="form-control" id="exampleInputNome" aria-describedby="emailHelp" name="nome">
+                <input type="text" class="form-control" id="exampleInputNome" aria-describedby="emailHelp" name="nome" required>
             </div>
             <div>
             <label for="exampleInputImg" class="form-label">Immagine:</label>
-                <input type="file" class="form-control" id="exampleInputImg" aria-describedby="emailHelp" name="img">
+                <input type="file" class="form-control" id="exampleInputImg" aria-describedby="emailHelp" name="img" required>
             </div>
           
             <button type="submit" class="btn btn-primary">Aggiungi</button>

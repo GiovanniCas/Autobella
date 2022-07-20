@@ -31,7 +31,9 @@
         <li class="nav-item">
           <a class="nav-link" href="{{route('listaFornitori')}}">Fornitori</a>
         </li>
-      
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('listaOrdini')}}">Ordini</a>
+        </li>
         <li>
           <a class="nav-link" href="{{ route('logout') }}"onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
           <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

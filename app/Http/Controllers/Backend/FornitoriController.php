@@ -169,7 +169,7 @@ class FornitoriController extends Controller
                 $img->save();
                 
                 
-                $nome_img = $img->ricambio_id.'.img';
+                $nome_img = $img->ricambio_id + $img->id.'.img';
                 $img->nome = $nome_img;
                 
                 $img->save();
@@ -223,10 +223,11 @@ class FornitoriController extends Controller
     }
 
     public function aggiungiCategoria(Request $request){
- 
         $categoria = Categoria::create([
             'descrizione' => $request->input('descrizione'),
+            'img' => $request->file('img')->store('public/img'),
         ]);
+        
         return redirect(route('vistaCategorie'));
     }
 
@@ -236,9 +237,10 @@ class FornitoriController extends Controller
     }
 
     public function modificaCategoria( Categoria $categoria ,Request $request){
-        
+       
         $categoria->descrizione = $request->descrizione;
-        
+        $categoria->img = $request->file('img')->store('public/img');
+    
         $categoria->save();
         return redirect(route('vistaCategorie'));
     }

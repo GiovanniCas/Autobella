@@ -34,7 +34,7 @@
             <div class="mb-3">
                 <label for="exampleInputCategoria" class="form-label">Categoria:</label>
                 <select class="form-select" name="categoria_id"  aria-label="Default select example" >
-                    <option value="{{$ricambio->categorie->descrizione}}">{{$ricambio->categorie->descrizione}}</option>
+                    <option value="{{$ricambio->categorie->id}}">{{$ricambio->categorie->descrizione}}</option>
                     @foreach($categorie as $categoria)
                         <option value="{{$categoria->id}}">{{$categoria->descrizione}}</option>
                     @endforeach

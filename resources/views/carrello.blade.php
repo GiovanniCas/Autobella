@@ -1,3 +1,6 @@
+@php
+    use App\Models\Ricambio;
+@endphp
 <x-layout>
     <h1>Carrello</h1>
     <div class="container">
@@ -7,9 +10,16 @@
             <div class="row">
                 
                 @foreach($ricambi_nel_carrello as $ricambio_nel_carrello)
+                
+                    @php 
+                        $ricambio = Ricambio::find($ricambio_nel_carrello->ricambio_id) 
+                    @endphp
                     <div class="col-12 col-sm-6 col-md-3">
                         <div class="card mt-3" style="width: 18rem;">
-                            <img src="..." class="card-img-top" alt="...">
+                            @if($ricambio->trovaImmagine())
+                                <img src="/storage/img/{{$ricambio->trovaImmagine()->nome}}" class="d-block w-100" alt="...">
+                            @endif 
+                            
                             <div class="card-body">
                                 <h5 class="card-title">{{$ricambio_nel_carrello->ricambi->nome}}</h5>
                                 <h5 class="card-title">{{$ricambio_nel_carrello->quantita}}</h5>

@@ -23,6 +23,9 @@ class Testata extends Model
         'totale',
     ] ;
 
+    const ORDINE_IN_PREPARAZIONE = 1;
+    const ORDINE_SPEDITO = 2;
+
     public function ricambiOrdinati(){
         return $this->hasMany(RicambioOrdinato::class);
     }

@@ -23,6 +23,7 @@ class RicambiSeeder extends Seeder
                 'codice_pezzo' => '4h8p',
                 'descrizione' => 'prodotto buono',
                 'prezzo' => 90.5,
+                'nome'=> 'pippo',
             ],
 
             [
@@ -31,6 +32,7 @@ class RicambiSeeder extends Seeder
                 'codice_pezzo' => '44er',
                 'descrizione' => 'prodotto buono',
                 'prezzo' => 8,
+                'nome'=> 'pluto',
             ],
 
             [
@@ -39,6 +41,7 @@ class RicambiSeeder extends Seeder
                 'codice_pezzo' => '986t',
                 'descrizione' => 'prodotto buono',
                 'prezzo' => 45,
+                'nome'=> 'paperino',
             ]
         ];
 

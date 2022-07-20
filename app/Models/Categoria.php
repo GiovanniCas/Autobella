@@ -14,6 +14,7 @@ class Categoria extends Model
     
     protected $fillable = [
         'descrizione' ,
+        'img',
     ];
 
     public function ricambi()

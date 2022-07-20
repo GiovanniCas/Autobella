@@ -43,44 +43,39 @@
             </div>
         </form>
     </div>
-    <div class="container mt-5">
-        <h3>Visti di recente:</h3>
-        <div class="row">
-            
-                
+   
+    @if(count(session('visti_di_recente')))
+
+        <div class="container mt-5">
+            <h3>Visti di recente:</h3>
+            <div class="row">
+          
                 @foreach($visti_di_recente as $visto_di_recente)
-                    
-                        @php 
-                            $ricambio = Ricambio::find($visto_di_recente) 
-                        @endphp
-                        <div class="col-12 col-sm-6 col-md-3">
-                            <div class="card mt-3" style="width: 18rem;">
-                                @if($ricambio->trovaImmagine())
-                                        <img src="/storage/img/{{$ricambio->trovaImmagine()->nome}}" class="d-block w-100" alt="...">
-                                @endif                                
-                                                                
-                            
-                                
-                                <div class="card-body">
-                                    <h5 class="card-title">{{$ricambio->nome}}</h5>
-                                    <h5 class="card-title">{{$ricambio->descrizione}}</h5>
-                                    <h5 class="card-title">${{$ricambio->prezzo}}</h5>
-                                    <h5 class="card-title">{{$ricambio->fornitori->ragione_sociale}}</h5>
-                                    <h5 class="card-title">{{$ricambio->categorie->descrizione}}</h5>
-                                    <!-- Button trigger modal -->
-                                    <a class="btn btn-primary" href="{{route('vistaDettaglio' , compact('ricambio'))}}">
-                                        Vai al Dettaglio
-                                    </a>
-                                    
-            
-                                </div>
+                @if($visto_di_recente !== $ricambio->id)
+                    @php 
+                        $ricambio = Ricambio::find($visto_di_recente) 
+                    @endphp
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="card mt-3" style="width: 18rem;">
+                            @if($ricambio->trovaImmagine())
+                                <img src="/storage/img/{{$ricambio->trovaImmagine()->nome}}" class="d-block w-100" alt="...">
+                            @endif                                
+                            <div class="card-body">
+                                <h5 class="card-title">{{$ricambio->nome}}</h5>
+                                <h5 class="card-title">{{$ricambio->descrizione}}</h5>
+                                <h5 class="card-title">${{$ricambio->prezzo}}</h5>
+                                <h5 class="card-title">{{$ricambio->fornitori->ragione_sociale}}</h5>
+                                <h5 class="card-title">{{$ricambio->categorie->descrizione}}</h5>
+                                <a class="btn btn-primary" href="{{route('vistaDettaglio' , compact('ricambio'))}}">Vai al Dettaglio</a>
                             </div>
                         </div>
-                   
+                    </div>
+                    @endif
                 @endforeach
-        
+                
+            </div>
         </div>
-    </div>
+    @endif
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 </x-layout>
