@@ -44,4 +44,11 @@ class Ricambio extends Model
     public function immagini(){
         return $this->hasMany(Immagine::class);
     }
+
+    public function trovaImmagine(){
+        
+        return $this->immagini()->where('ricambio_id' , $this->id)->first();
+        //dd($immagini);
+        
+    }
 }

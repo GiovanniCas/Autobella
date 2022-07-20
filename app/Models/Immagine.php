@@ -18,6 +18,7 @@ class Immagine extends Model
         'nome',
     ];
 
+    
 
     public function ricambi(){
         return $this->belongsTo(Ricambio::class , 'ricambio_id');

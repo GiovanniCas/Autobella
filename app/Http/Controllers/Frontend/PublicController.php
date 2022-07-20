@@ -140,7 +140,26 @@ class PublicController extends Controller
        
 
     public function vistaDettaglio(Ricambio $ricambio){
+       
+       $visti_di_recente = [];
+       dd($visti_di_recente);
+       //array_push($visti_di_recente , $ricambio->id);
+                
+
+        if(empty(session('visti_di_recente'))){
+            
+            session()->put('visti_di_recente' , $visti_di_recente);
+            
+        }else{
+            
+            if(!in_array($ricambio->id , session('visti_di_recente'))){
+                session()->push('visti_di_recente' , $ricambio->id);
+            }
+
+            $visti_di_recente = array_slice(session('visti_di_recente') , -5 , 4);
         
+        }
+      
         $immagini = Immagine::where('ricambio_id' , $ricambio->id)->get();
 
         $modelli_compatibili = [];
@@ -150,10 +169,9 @@ class PublicController extends Controller
             foreach($modelli as $modello) {
                 array_push($modelli_compatibili , $modello);
             }
-            
-        
-        
+     
         return view('ricambi.vistaDettaglio' , compact('ricambio'))->with(compact('immagini'))
+                ->with(compact('visti_di_recente'))
                 ->with(compact('modelli_compatibili'));
     }
 

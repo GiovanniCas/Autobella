@@ -1,3 +1,4 @@
+
 <x-layout>
 <h1>Prodotti</h1>
     <div class=" container mt-3">
@@ -46,16 +47,16 @@
     @guest
         <div class="container">
             <form action="{{route('aggiungiAlCarrello')}}" method="post" >
-            @csrf   
-            <div class="row">
-                @foreach($ricambi as $ricambio)
+                @csrf   
+                <div class="row">
+                    @foreach($ricambi as $ricambio)
                     <div class="col-12 col-sm-6 col-md-3">
                         <div class="card mt-3" style="width: 18rem;">
-                            @foreach($immagini as $immagine)
-                                @if($immagine->ricambio_id === $ricambio->id)
-                                    <img src="/storage/img/{{$immagine->nome}}" class="d-block w-100" alt="...">
-                                @endif
-                            @endforeach  
+                            @if($ricambio->trovaImmagine())
+                                    <img src="/storage/img/{{$ricambio->trovaImmagine()->nome}}" class="d-block w-100" alt="...">
+                            @endif                                
+                                                              
+                           
                             
                             <div class="card-body">
                                 <h5 class="card-title">{{$ricambio->nome}}</h5>
@@ -69,7 +70,7 @@
                                 </a>
                                 
                             </div>
-                            <label for="inputQuantity">Quantita :</label>
+                                <label for="inputQuantity">Quantita :</label>
                                 <input type="number" min="0" name="quantita[{{$ricambio->id}}]" >
                             </div>
                         </div>

@@ -109,21 +109,16 @@ class FornitoriController extends Controller
             $ricambi = $query_ricambio->get();
         
         }
-
-            
         
+
         $modelli_compatibili = [];
         
         foreach ($ricambi as $ricambio) {
             $modelli = Ricambio::find($ricambio->id)->modelli()->get();
-            //dd($modelli);
+            
             foreach($modelli as $modello) {
                 array_push($modelli_compatibili , $modello);
             }
-           
-            
-            // $modelli = ModelloCompatibile::where('ricambio_id' , $ricambio->id)->get();
-            // array_push($pippo , $modelli);
             
         }
         
@@ -206,7 +201,6 @@ class FornitoriController extends Controller
         $ricambio->nome = $request->nome;
         $ricambio->fornitore_id = $request->fornitore_id;
         $ricambio->categoria_id = $request->categoria_id;
-        //dd($request);
         
         $ricambio->save();
         return redirect(route('vistaRicambi'));
@@ -229,7 +223,7 @@ class FornitoriController extends Controller
     }
 
     public function aggiungiCategoria(Request $request){
-        //dd($request->all());
+ 
         $categoria = Categoria::create([
             'descrizione' => $request->input('descrizione'),
         ]);
