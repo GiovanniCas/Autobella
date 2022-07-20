@@ -2,18 +2,17 @@
 
 namespace Database\Factories;
 
+use App\Models\Marche;
+use Database\Factories\MarcaFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class MarcheFactory extends Factory
+class MarcaFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    
+
     public function definition()
     {
         return [

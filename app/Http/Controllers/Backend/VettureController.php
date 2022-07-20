@@ -13,10 +13,68 @@ use Illuminate\Support\Facades\Gate;
 
 class VettureController extends Controller
 {
+    public function vistaMarche(){
+        $marche = Marca::all();
+        return view('marche.lista' , compact('marche'));
+    }
+
+    public function vistaAggiungiMarca(){
+
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+        
+        return view('marche.formAggiunta');
+    }
+
+    public function aggiungiMarca(Request $request){
+        
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+
+        $marca = Marca::create([
+            'nome' => $request->input('nome'),
+            'img' => $request->file('img')->store('public/img'),
+        ]);
+        return redirect(route('vistaMarche'));
+    }
+
+    public function vistaModificaMarca(Marca $marca){
+
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+      
+        return view('marche.formModifica', compact('marca'));
+    }
+
+    public function modificaMarca( Marca $marca ,Request $request){
+        
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+        
+        $marca->nome = $request->nome;
+        $marca->img = $request->file('img')->store('public/img');
+        
+        $marca->save();
+        dd($marca);
+        return redirect(route('vistaMarche'));
+    }
+
+    public function eliminaMarca(Marca $marca ){
+
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+        
+        $marca->delete();
+        return redirect(route('vistaMarche'));
+    }
+
     public function vistaModelli(){
- 
-        
-        
+    
        $modelli = Modello::all();
        
         $ricambi_compatibili = [];
@@ -27,8 +85,6 @@ class VettureController extends Controller
                 array_push($ricambi_compatibili , $ricambio);
             }           
         }
-        
-            
 
         return view('modelli.lista' , compact('modelli'))->with(compact('ricambi_compatibili'));
     }
@@ -96,62 +152,5 @@ class VettureController extends Controller
         return redirect(route('vistaModelli'));
     }
 
-    public function vistaMarche(){
-        $marche = Marca::all();
-        return view('marche.lista' , compact('marche'));
-    }
-
-    public function vistaAggiungiMarca(){
-
-        if (Gate::denies('Gestore')) {
-            abort(403);            
-        } 
-        
-        return view('marche.formAggiunta');
-    }
-
-    public function aggiungiMarca(Request $request){
-        
-        if (Gate::denies('Gestore')) {
-            abort(403);            
-        } 
-
-        $marca = Marca::create([
-            'nome' => $request->input('nome'),
-            'img' => $request->file('img')->store('public/img'),
-        ]);
-        return redirect(route('vistaMarche'));
-    }
-
-    public function vistaModificaMarca(Marca $marca){
-
-        if (Gate::denies('Gestore')) {
-            abort(403);            
-        } 
-      
-        return view('marche.formModifica', compact('marca'));
-    }
-
-    public function modificaMarca( Marca $marca ,Request $request){
-
-        if (Gate::denies('Gestore')) {
-            abort(403);            
-        } 
-        
-        $marca->nome = $request->nome;
-        $marca->img = $request->file('img')->store('public/img');
-        
-        $marca->save();
-        return redirect(route('vistaMarche'));
-    }
-
-    public function eliminaMarca(Marca $marca ){
-
-        if (Gate::denies('Gestore')) {
-            abort(403);            
-        } 
-        
-        $marca->delete();
-        return redirect(route('vistaMarche'));
-    }
+    
 }
