@@ -23,7 +23,7 @@ class FornitoreFactory extends Factory
             'comune' => fake()->name(),
             'cap' => fake()->name(),
             'provincia' => fake()->name(),
-            'partita_iva' => 'POUYG56RTR454323S',
+            'partita_iva' => fake()->name(),
         ];
     }
 }

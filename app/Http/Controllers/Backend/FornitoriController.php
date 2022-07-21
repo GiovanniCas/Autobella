@@ -22,7 +22,8 @@ class FornitoriController extends Controller
         if (Gate::denies('Gestore')) {
             abort(403);            
         } 
-        $fornitori = Fornitore::all();     
+        $fornitori = Fornitore::all(); 
+           
         return view('fornitori.lista' , compact('fornitori'));
     }
 
