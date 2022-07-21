@@ -86,11 +86,10 @@ class FornitoriController extends Controller
     }
 
     public function vistaRicambi(){
-
         $immagini = Immagine::all();
         $ricambi = Ricambio::all();
         $fornitori = Fornitore::all();
-    
+        
         //$modelli_compatibili = Ricambio::find(6)->modelli()->get();
         $cercaRicambio = session('cercaRicambio');
         if(session('cercaRicambio') || session('cercaModello') || session('cercaMarca') || session('cercaAnnoProduzione')){
@@ -106,12 +105,13 @@ class FornitoriController extends Controller
                 
             }
             if($cercaModello){
-               $query_ricambio->whereHas('modelli', function (Builder $query) use($cercaModello )  {
+                $query_ricambio->whereHas('modelli', function (Builder $query) use($cercaModello )  {
                    $query->where('nome', 'LIKE','%'.$cercaModello.'%');
                 });
                 
             }
             if($cercaAnnoProduzione){
+                //    dd('ciao');
                 $query_ricambio->whereHas('modelli', function (Builder $query) use( $cercaAnnoProduzione)  {
                     $query->where('anno_produzione', 'LIKE','%'.$cercaAnnoProduzione.'%');
                     
@@ -127,7 +127,7 @@ class FornitoriController extends Controller
             }
 
             $ricambi = $query_ricambio->get();
-        
+
         }
         
 
@@ -141,6 +141,7 @@ class FornitoriController extends Controller
             }
             
         }
+    
         
         return view('ricambi.lista' , compact('ricambi'))->with(compact('fornitori'))->with(compact('modelli_compatibili'))
                 ->with(compact('immagini'));

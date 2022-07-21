@@ -63,6 +63,7 @@ class RicambiTest extends TestCase
         
         $response = $this->get(route('vistaRicambi'));
         $response->assertStatus(200);
+        
     }
 
     public function test_vista_pagina_aggiungi_nuovo_ricambio()

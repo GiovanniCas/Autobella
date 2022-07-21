@@ -23,7 +23,7 @@ class PublicController extends Controller
     }
 
     public function cercaRicambiCompatibili(Request $request){
-        //dd($request);
+        //dd($request->all());
         $cercaModello = $request->cercaModello;
         $cercaMarca = $request->cercaMarca;
         $cercaRicambio = $request->cercaRicambio;
@@ -39,13 +39,13 @@ class PublicController extends Controller
 
     public function carrello(){
         $ricambi_nel_carrello = RicambioOrdinato::where('testata_id' , session('testata_id'))->get();
+ 
         return view('carrello')->with(compact('ricambi_nel_carrello'));
     }
 
     public function aggiungiAlCarrello(Request $request){
-       
+        
         $quantita_selezionate = $request->input(['quantita']);
-
         if(!session('testata_id')){
             $testata = Testata::create();
             $testata_id = $testata->id;
@@ -53,7 +53,7 @@ class PublicController extends Controller
         }
 
         foreach($quantita_selezionate as $id_ricambio => $quantita_selezionata){
-
+            
             if($quantita_selezionata > 0 && $quantita_selezionata != null){
                 $ricambi = RicambioOrdinato::where('ricambio_id', $id_ricambio)->where('testata_id' , session('testata_id'))->exists();
                 
@@ -84,25 +84,28 @@ class PublicController extends Controller
     public function modificaQuantitaDesiderate(Request $request){
 
         $quantita_selezionate = $request->input(['quantita']);
-       // dd($quantita_selezionate);
+        //dd($quantita_selezionate);
 
         foreach( $quantita_selezionate as $id_ricambio_selezionato => $nuova_quantita){
+            
             $ricambio_selezionato = RicambioOrdinato::where('id' , $id_ricambio_selezionato)->where('testata_id' , session('testata_id'))->update(['quantita' => $nuova_quantita]);
+    
         }
         $ricambi_nel_carrello = RicambioOrdinato::all()->where('testata_id', session('testata_id'));
-        
         foreach( $ricambi_nel_carrello as  $ricambio_nel_carrello) {
             if( $ricambio_nel_carrello->quantita === 0){
-                
-                 $ricambio_nel_carrello->delete();
+
+                $ricambio_nel_carrello->delete();
             }
         }
 
         $ricambi_nel_carrello = RicambioOrdinato::all()->where('testata_id', session('testata_id'));//->where('quantity', 0);
-
+        
         if(count($ricambi_nel_carrello) > 0) {
+            
             return redirect(route('ordine'));
         } else {
+            
             return redirect(route('welcome'));
         };
            
@@ -114,6 +117,7 @@ class PublicController extends Controller
     }
         
     public function confermaOrdine(Request $request){
+        
         $ricambi = RicambioOrdinato::all()->where('testata_id' , session('testata_id'));
             
         $totale = 0;
@@ -121,7 +125,6 @@ class PublicController extends Controller
             $tot = $ricambio->quantita * $ricambio->prezzo_unitario;
             $totale += $tot;
         }
-        
         
         $ordine = Testata::where('id' , session('testata_id'))->update([
             'name' => $request->input('nome'),
@@ -134,7 +137,7 @@ class PublicController extends Controller
             'stato' => 1,
             'data' => date("Y-m-d"),
         ]);  
-
+        
         
         session()->flush();
         
@@ -147,29 +150,29 @@ class PublicController extends Controller
        
         $visti_di_recente = [];
         array_push($visti_di_recente , $ricambio->id);
-       
+        
         if(empty(session('visti_di_recente'))){
            
             session()->put('visti_di_recente' , $visti_di_recente);
             
         }else{
-
-           //dd(session('visti_di_recente'));
+           
             if(!in_array($ricambio->id ,  session('visti_di_recente'))){
                 session()->push('visti_di_recente' , $ricambio->id);
+                
             }
         }
+       
         $visti_di_recente = array_slice(session('visti_di_recente') , -5 , 4);
-      
         $immagini = Immagine::where('ricambio_id' , $ricambio->id)->get();
-
+        
         $modelli_compatibili = [];
-               
+        
         $modelli = Ricambio::find($ricambio->id)->modelli()->get();
         foreach($modelli as $modello) {
             array_push($modelli_compatibili , $modello);
         }
-     
+        
         return view('ricambi.vistaDettaglio' , compact('ricambio'))->with(compact('immagini'))
                 ->with(compact('visti_di_recente'))
                 ->with(compact('modelli_compatibili'));
