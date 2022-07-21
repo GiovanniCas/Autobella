@@ -59,7 +59,7 @@ class VettureController extends Controller
         $marca->img = $request->file('img')->store('public/img');
         
         $marca->save();
-        dd($marca);
+        
         return redirect(route('vistaMarche'));
     }
 
@@ -75,17 +75,18 @@ class VettureController extends Controller
 
     public function vistaModelli(){
     
-       $modelli = Modello::all();
-       
+        $modelli = Modello::all();
+        
         $ricambi_compatibili = [];
-
+        
         foreach ($modelli as $modello) {
             $ricambi = Modello::find($modello->id)->ricambi()->get();
             foreach($ricambi as $ricambio){
+                
                 array_push($ricambi_compatibili , $ricambio);
             }           
         }
-
+        
         return view('modelli.lista' , compact('modelli'))->with(compact('ricambi_compatibili'));
     }
 
@@ -96,6 +97,7 @@ class VettureController extends Controller
         } 
 
         $marche = Marca::all();
+
         return view('modelli.formAggiunta' , compact('marche'));
     }
 
@@ -104,14 +106,14 @@ class VettureController extends Controller
         if (Gate::denies('Gestore')) {
             abort(403);            
         } 
-
-        $categoria = Modello::create([
+        $modello = Modello::create([
             'marca_id' => $request->input('marca_id'),
             'nome' => $request->input('nome'),
             'anno_produzione' => $request->input('anno_produzione'),
             'anno_ritiro' => $request->input('anno_ritiro'),
             'img' => $request->file('img')->store('public/img'),
         ]);
+       
         return redirect(route('vistaModelli'));
     }
 
@@ -126,17 +128,16 @@ class VettureController extends Controller
     }
 
     public function modificaModello( Modello $modello ,Request $request){
-        
         if (Gate::denies('Gestore')) {
             abort(403);            
         } 
-
+        
         $modello->nome = $request->nome;
         $modello->marca_id = $request->marca_id;
         $modello->anno_produzione = $request->anno_produzione;
         $modello->anno_ritiro = $request->anno_ritiro;
         $modello->img = $request->file('img')->store('public/img');
-        
+
         $modello->save();
 
         return redirect(route('vistaModelli'));

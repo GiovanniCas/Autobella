@@ -2,23 +2,24 @@
 
 namespace Database\Factories;
 
+use Database\Factories\RicambioFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class CategorieFactory extends Factory
+class RicambioFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+  
     public function definition()
     {
         return [
+            'categoria_id' => 1,
+            'fornitore_id' => 1,
             'nome' => fake()->name(),
-
+            'codice_pezzo' => fake()->name(),
+            'descrizione' => fake()->name(),
+            'prezzo' => 54,
         ];
     }
 }

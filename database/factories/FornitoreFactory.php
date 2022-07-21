@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use Database\Factories\FornitoreFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class FornitoriFactory extends Factory
+class FornitoreFactory extends Factory
 {
     /**
      * Define the model's default state.

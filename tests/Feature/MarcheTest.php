@@ -92,13 +92,13 @@ class VettureTest extends TestCase
         $response = $this->actingAs($user)->put(route('modificaMarca', $marca->id) , 
         [
             'nome' => "Massimo",
+            'img' => $file,
             
         ]);
         
         
         $this->assertDatabaseHas('marche' , 
         [
-            'id' => $marca->id,
             'nome' => "Massimo",
         ]);
 
@@ -107,7 +107,22 @@ class VettureTest extends TestCase
 
     public function test_elimina_marca()
     {
+        $user = User::factory()->create(['ruolo' => 1]);
+        $user2 = User::factory()->create(['ruolo' => 2]);
+        Storage::fake('avatars');
+        $file = UploadedFile::fake()->image('avatar.jpg');
+        $marca = Marca::factory()->create(['img' =>  $file]);
+        $marca2 = Marca::factory()->create(['img' =>  $file]);
+        
+        $response = $this->actingAs($user)->delete(route('eliminaMarca', $marca->id));
+        
+        $this->assertDatabaseMissing('marche' , 
+        [
+            'id' => $marca->id,        
+        ]);
 
+        $response = $this->actingAs($user2)->delete(route('eliminaMarca', $marca2->id));
+        $response->assertStatus(403);
     }
 
 

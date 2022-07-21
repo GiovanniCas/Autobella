@@ -22,6 +22,7 @@ class UsersSeeder extends Seeder
                 'nome' => 'Giovanni',
                 'cognome' => 'Castagna',
                 'email' => 'giovanni@giovanni.it',
+                'ruolo' => 1,
                 'password' => Hash::make('password'),
                 
             ]
