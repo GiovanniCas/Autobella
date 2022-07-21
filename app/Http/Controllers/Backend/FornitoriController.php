@@ -23,7 +23,7 @@ class FornitoriController extends Controller
             abort(403);            
         } 
         $fornitori = Fornitore::all(); 
-           
+
         return view('fornitori.lista' , compact('fornitori'));
     }
 
@@ -86,9 +86,11 @@ class FornitoriController extends Controller
     }
 
     public function vistaRicambi(){
+
         $immagini = Immagine::all();
         $ricambi = Ricambio::all();
         $fornitori = Fornitore::all();
+    
         //$modelli_compatibili = Ricambio::find(6)->modelli()->get();
         $cercaRicambio = session('cercaRicambio');
         if(session('cercaRicambio') || session('cercaModello') || session('cercaMarca') || session('cercaAnnoProduzione')){
@@ -140,8 +142,6 @@ class FornitoriController extends Controller
             
         }
         
-        
-     
         return view('ricambi.lista' , compact('ricambi'))->with(compact('fornitori'))->with(compact('modelli_compatibili'))
                 ->with(compact('immagini'));
     }
@@ -174,7 +174,6 @@ class FornitoriController extends Controller
             'nome' => $request->input('nome'),
         ]);
         $ricambio->save();
-
         $modelli_id = $request->modelli_id;
         
         foreach($modelli_id as $modello_id){
@@ -186,6 +185,7 @@ class FornitoriController extends Controller
         
         
         $immagini = $request->immagini;
+        
         if($immagini){
 
             foreach($immagini as $immagine){
@@ -199,8 +199,6 @@ class FornitoriController extends Controller
                 $img->nome = $nome_img;
                 
                 $img->save();
-                
-             
                 
                 $destinationPath = 'storage/img/';
                 
