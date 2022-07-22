@@ -1,6 +1,6 @@
 <x-layout>
     <div class="container">
-        <h1>Modifica categoria</h1>
+        <h1>Modifica marca</h1>
         <form action="{{route('modificaMarca' , compact('marca'))}}" method="post" enctype="multipart/form-data">
             @method('put')
             @csrf
@@ -14,7 +14,18 @@
                 <input type="file" class="form-control" id="exampleInputImg" aria-describedby="emailHelp" name="img" required>
             </div>
           
-            <button type="submit" class="btn btn-primary">Modifica</button>
+            <button type="submit" class="btn btn-primary mt-5">Modifica</button>
         </form>
+        <div class="d-flex mt-5">
+            <h3>Immagine copertina</h3><br>
+            <div>
+                <form action="{{route('eliminaImmagineMarca' , compact('marca'))}}" method="post">
+                    <button class="btn text-danger">X</button>
+                    @csrf
+                    @method('delete')
+                    <img src="{{Storage::url($marca->img)}}" style="height:150px; width: 200px;" alt="">
+                </form>
+            </div>
+        </div>
     </div>
 </x-layout>

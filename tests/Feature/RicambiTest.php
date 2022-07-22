@@ -96,6 +96,7 @@ class RicambiTest extends TestCase
         $file = UploadedFile::fake()->image('avatar.jpg');
         $file2 = UploadedFile::fake()->image('avenger.jpg');
 
+        
         $response = $this->actingAs($user)->post(route('aggiungiRicambi'), [
             'fornitore_id' => $fornitore->id,
             'categoria_id' => $categoria->id,
@@ -111,7 +112,8 @@ class RicambiTest extends TestCase
             'prezzo' => 55,
             'nome' => 'Giovanni', 
         ]);
-
+        
+        // Storage::disk('avatars')->assertExists('avatar.jpg');
         $response= $this->actingAs($user)->get(route('vistaRicambi'));
         $response->assertStatus(200);
 

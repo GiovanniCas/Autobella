@@ -20,7 +20,7 @@ return new class extends Migration
             $table->biginteger("testata_id")->unsigned();
             $table->foreign("testata_id")->references("id")->on("testata_ordini")->onDelete('cascade');
             $table->integer("quantita");
-            $table->integer("prezzo_unitario");
+            $table->decimal("prezzo_unitario");
             $table->timestamps();
         });
     }

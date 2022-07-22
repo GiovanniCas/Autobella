@@ -29,6 +29,10 @@ Route::prefix('/admin')->group(function () {
     Route::get('/modifica/ricambio/{ricambio}' , [FornitoriController::class , 'vistaModificaRicambio'])->name('vistaModificaRicambio');
     Route::put('/modifica/ricambio/invio/dati/{ricambio}' , [FornitoriController::class , 'modificaRicambio'])->name('modificaRicambio');
     Route::delete('/elimina/ricambio/{ricambio}' , [FornitoriController::class , 'eliminaRicambio'])->name('eliminaRicambio');
+    //elimina immagine correlata
+    Route::delete('/elimina/immagine/{immagine}' , [FornitoriController::class , 'eliminaImmagine'])->name('eliminaImmagine');
+    //elimina immagine correlata
+    Route::delete('/elimina/modello/compatibile/{modello_compatibile}' , [FornitoriController::class , 'eliminaModelloCompatibile'])->name('eliminaModelloCompatibile');
 
 
     //rotte per fornitori
@@ -47,6 +51,8 @@ Route::prefix('/admin')->group(function () {
     Route::get('/modifica/categoria/{categoria}' , [FornitoriController::class , 'vistaModificaCategoria'])->name('vistaModificaCategoria');
     Route::put('/modifica/categoria/invio/dati/{categoria}' , [FornitoriController::class , 'modificaCategoria'])->name('modificaCategoria');
     Route::delete('/elimina/categoria/{categoria}' , [FornitoriController::class , 'eliminaCategoria'])->name('eliminaCategoria');
+    //elimina immagine correlata
+    Route::delete('/elimina/immagine/categoria/{categoria}' , [FornitoriController::class , 'eliminaImmagineCategoria'])->name('eliminaImmagineCategoria');
 
 
     //rotte per modelli
@@ -56,6 +62,8 @@ Route::prefix('/admin')->group(function () {
     Route::get('/modifica/modello/{modello}' , [VettureController::class , 'vistaModificaModello'])->name('vistaModificaModello');
     Route::put('/modifica/modello/invio/dati/{modello}' , [VettureController::class , 'modificaModello'])->name('modificaModello');
     Route::delete('/elimina/modello/{modello}' , [VettureController::class , 'eliminaModello'])->name('eliminaModello');
+    //elimina immagine correlata
+    Route::delete('/elimina/immagine/modello/{modello}' , [VettureController::class , 'eliminaImmagineModello'])->name('eliminaImmagineModello');
 
 
     //rotte per marche
@@ -65,6 +73,8 @@ Route::prefix('/admin')->group(function () {
     Route::get('/modifica/marca/{marca}' , [VettureController::class , 'vistaModificaMarca'])->name('vistaModificaMarca');
     Route::put('/modifica/marca/invio/dati/{marca}' , [VettureController::class , 'modificaMarca'])->name('modificaMarca');
     Route::delete('/elimina/marca/{marca}' , [VettureController::class , 'eliminaMarca'])->name('eliminaMarca');
+    //elimina immagine correlata
+    Route::delete('/elimina/immagine/marca/{marca}' , [VettureController::class , 'eliminaImmagineMarca'])->name('eliminaImmagineMarca');
 
 
     //rotte per ordini

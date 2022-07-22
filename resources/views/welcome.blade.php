@@ -24,7 +24,7 @@
                     @endif 
                 </div>
                 
-                <button class="btn btn-outline-dark my-btn" style="height: 40px;" type="submit"><i class="fa-solid fa-magnifying-glass text-dark"></i></button>
+                <button class="btn btn-outline-dark my-btn" style="height: 40px; margin-top: auto;" type="submit"><i class="fa-solid fa-magnifying-glass text-dark"></i></button>
             </form>
         </div>    
     </div>

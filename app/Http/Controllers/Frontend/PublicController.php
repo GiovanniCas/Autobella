@@ -157,13 +157,13 @@ class PublicController extends Controller
             
         }else{
            
+            $visti_di_recente = array_slice(session('visti_di_recente') , -4 );
             if(!in_array($ricambio->id ,  session('visti_di_recente'))){
                 session()->push('visti_di_recente' , $ricambio->id);
                 
             }
         }
        
-        $visti_di_recente = array_slice(session('visti_di_recente') , -5 , 4);
         $immagini = Immagine::where('ricambio_id' , $ricambio->id)->get();
         
         $modelli_compatibili = [];

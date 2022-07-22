@@ -39,7 +39,7 @@
                 <label for="exampleInputCategoria" class="form-label">Modelli Compatibili:</label>
                 <select class="form-select" name="modelli_id[]" multiple aria-label="Default select example" >
                     @foreach($modelli as $modello)
-                        <option value="{{$modello->id}}">{{$modello->nome}}</option>
+                        <option value="{{$modello->id}}">{{$modello->nome}} , {{$modello->anno_produzione}}</option>
                     @endforeach
                 </select>
             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use Storage;
 use App\Models\Marca;
 use App\Models\Modello;
 use App\Models\Ricambio;
@@ -61,6 +62,18 @@ class VettureController extends Controller
         $marca->save();
         
         return redirect(route('vistaMarche'));
+    }
+
+    public function eliminaImmagineMarca(Marca $marca){
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+       
+        if(\Storage::exists($marca->img)){
+            \Storage::delete($marca->img);
+        }
+       
+        return redirect()->back();
     }
 
     public function eliminaMarca(Marca $marca ){
@@ -141,6 +154,18 @@ class VettureController extends Controller
         $modello->save();
 
         return redirect(route('vistaModelli'));
+    }
+
+    public function eliminaImmagineModello(){
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+
+        if(Storage::exists($modello->img)){
+            \Storage::delete($modello->img);
+        }
+       
+        return redirect()->back();
     }
 
     public function eliminaModello(Modello $modello ){

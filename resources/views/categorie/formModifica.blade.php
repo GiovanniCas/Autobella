@@ -11,10 +11,23 @@
             </div>
             <div>
                 <label for="exampleInputImg" class="form-label">Immagine:</label>
-                <input type="file" class="form-control" id="exampleInputImg" value="{{$categoria->img}}" aria-describedby="emailHelp" name="img" >
+                <input type="file" class="form-control" id="exampleInputImg" value="{{$categoria->img}}" aria-describedby="emailHelp" name="img" required>
             </div>
           
-            <button type="submit" class="btn btn-primary">Modifica</button>
+            <button type="submit" class="btn btn-primary mt-3">Modifica</button>
         </form>
+        
+            <div class="d-flex mt-5">
+                <h3>Immagine copertina</h3><br>
+                <div>
+                    <form action="{{route('eliminaImmagineCategoria' , compact('categoria'))}}" method="post">
+                        <button class="btn text-danger">X</button>
+                        @csrf
+                        @method('delete')
+                        <img src="{{Storage::url($categoria->img)}}" style="height:150px; width: 200px;" alt="">
+                    </form>
+                </div>
+            </div>
+       
     </div>
 </x-layout>

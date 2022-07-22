@@ -30,52 +30,55 @@
                     <h3 class="card-title">Fornitore: {{$ricambio->fornitori->ragione_sociale}}</h3>
                     <h3 class="card-title">Categoria: {{$ricambio->categorie->descrizione}}</h3>
                     <br>
+                    <br>
                     <h3>Compatibile con:</h3>
                     @foreach($modelli_compatibili as $modello_compatibile)
                         @if($modello_compatibile->pivot->ricambio_id === $ricambio->id) 
                             <p>{{$modello_compatibile->nome}}</p>
                         @endif
                     @endforeach  
-                    <label for="inputQuantity">Quantita :</label>
-                    <input type="number" min="0" name="quantita[{{$ricambio->id}}]" > <br>
-                    <button type="submit" class="btn btn-info mt-5">Aggiungi al carrello</button>
+                    <div class="mt-5">
+                        <label for="inputQuantity">Quantita :</label>
+                        <input type="number" min="0" name="quantita[{{$ricambio->id}}]" > <br>
+                    </div>
+                    <button type="submit" class="btn btn-info mt-3">Aggiungi al carrello</button>
                 </div>
             </div>
         </form>
     </div>
    
-    @if(count(session('visti_di_recente')))
-
+    @if(count(session('visti_di_recente')) >1 )
+    
         <div class="container mt-5">
             <h3>Visti di recente:</h3>
             <div class="row">
           
                 @foreach($visti_di_recente as $visto_di_recente)
-                @if($visto_di_recente !== $ricambio->id)
-                    @php 
-                        $ricambio = Ricambio::find($visto_di_recente) 
-                    @endphp
-                    <div class="col-12 col-sm-6 col-md-3">
-                        <div class="card mt-3" style="width: 18rem;">
-                            @if($ricambio->trovaImmagine())
-                                <img src="/storage/img/{{$ricambio->trovaImmagine()->nome}}" class="d-block w-100" alt="...">
-                            @endif                                
-                            <div class="card-body">
-                                <h5 class="card-title">{{$ricambio->nome}}</h5>
-                                <h5 class="card-title">{{$ricambio->descrizione}}</h5>
-                                <h5 class="card-title">${{$ricambio->prezzo}}</h5>
-                                <h5 class="card-title">{{$ricambio->fornitori->ragione_sociale}}</h5>
-                                <h5 class="card-title">{{$ricambio->categorie->descrizione}}</h5>
-                                <a class="btn btn-primary" href="{{route('vistaDettaglio' , compact('ricambio'))}}">Vai al Dettaglio</a>
+                    @if($visto_di_recente !== $ricambio->id)
+                        @php 
+                            $ricambio = Ricambio::find($visto_di_recente) 
+                        @endphp
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <div class="card mt-3" style="width: 18rem;">
+                                @if($ricambio->trovaImmagine())
+                                    <img src="/storage/img/{{$ricambio->trovaImmagine()->nome}}" class="d-block w-100" alt="...">
+                                @endif                                
+                                <div class="card-body">
+                                    <h5 class="card-title">{{$ricambio->nome}}</h5>
+                                    <h5 class="card-title">{{$ricambio->descrizione}}</h5>
+                                    <h5 class="card-title">${{$ricambio->prezzo}}</h5>
+                                    <h5 class="card-title">{{$ricambio->fornitori->ragione_sociale}}</h5>
+                                    <h5 class="card-title">{{$ricambio->categorie->descrizione}}</h5>
+                                    <a class="btn btn-primary" href="{{route('vistaDettaglio' , compact('ricambio'))}}">Vai al Dettaglio</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endif
                 @endforeach
                 
             </div>
         </div>
     @endif
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    
 
 </x-layout>

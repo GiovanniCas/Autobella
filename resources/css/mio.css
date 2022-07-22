@@ -35,3 +35,20 @@
   height: 100%;
   object-fit: cover;
 }
+
+.aggiungi-al-carrello {
+  position: absolute;
+  width: 100%;
+  background-color: darkgray;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  cursor: pointer;
+  text-align: center;
+}
+
+.ricambio-card:hover .cart{
+  bottom: 50px;
+  opacity: 1;
+  padding: 10px;
+  text-decoration: none;
+}

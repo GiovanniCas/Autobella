@@ -2,8 +2,8 @@
     use App\Models\Ricambio;
 @endphp
 <x-layout>
-    <h1>Carrello</h1>
     <div class="container">
+        <h1>Carrello</h1>
         <form action="{{route('modificaQuantitaDesiderate')}}" method="post" >
         @method('put')
         @csrf   
@@ -21,14 +21,16 @@
                             @endif 
                             
                             <div class="card-body">
-                                <h5 class="card-title">{{$ricambio_nel_carrello->ricambi->nome}}</h5>
-                                <h5 class="card-title">{{$ricambio_nel_carrello->quantita}}</h5>
+                                <h5 class="card-title">Nome: {{$ricambio_nel_carrello->ricambi->nome}}</h5>
+                                <h5 class="card-title">Descrizione: {{$ricambio_nel_carrello->ricambi->descrizione}}</h5>
+                                <h5 class="card-title">Prezzo: ${{$ricambio_nel_carrello->ricambi->prezzo}}</h5>
                                 <label for="inputQuantity">Quantita :</label>
                                 <input type="number" min="0" value="{{$ricambio_nel_carrello->quantita}}" name="quantita[{{$ricambio_nel_carrello->id}}]" >
                             
                             </div>
                         </div>
-                    </div>    
+                    </div>  
+                    <h2>TOT :</h2>  
                 @endforeach    
                 <button type="submit" class="btn btn-info mt-5">Procedi con l'ordine</button>
             </div>

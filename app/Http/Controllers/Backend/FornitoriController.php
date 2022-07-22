@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use Storage;
 use App\Models\Marca;
 use App\Models\Modello;
 use App\Models\Immagine;
@@ -12,7 +13,6 @@ use Illuminate\Http\Request;
 use App\Models\ModelloCompatibile;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
 
 
@@ -86,6 +86,7 @@ class FornitoriController extends Controller
     }
 
     public function vistaRicambi(){
+
         $immagini = Immagine::all();
         $ricambi = Ricambio::all();
         $fornitori = Fornitore::all();
@@ -155,7 +156,7 @@ class FornitoriController extends Controller
 
         $fornitori = Fornitore::all();
         $categorie = Categoria::all();
-        $modelli = Modello::all();
+        $modelli = Modello::all()->sortBy('nome');
         
         return view('ricambi.formAggiunta' , compact('fornitori'))->with(compact('categorie'))->with(compact('modelli'));
     }
@@ -219,8 +220,13 @@ class FornitoriController extends Controller
 
         $fornitori = Fornitore::all();
         $categorie = Categoria::all();
+        $modelli = Modello::all()->sortBy('nome');
+        $modelli_compatibili = Ricambio::find($ricambio->id)->modelli()->orderBy('nome')->get();
+        $immagini = Immagine::where('ricambio_id' , $ricambio->id)->get();
+        //dd($modelli_compatibili);
+        
       
-        return view('ricambi.formModifica', compact('ricambio'))->with(compact('fornitori'))->with(compact('categorie'));
+        return view('ricambi.formModifica', compact('ricambio'))->with(compact('fornitori'))->with(compact('categorie'))->with(compact('immagini'))->with(compact('modelli'))->with(compact('modelli_compatibili'));
     }
 
     public function modificaRicambio( Ricambio $ricambio ,Request $request){  
@@ -237,7 +243,60 @@ class FornitoriController extends Controller
         $ricambio->categoria_id = $request->categoria_id;
         
         $ricambio->save();
+        
+        $immagini = $request->immagini;
+        
+        if($immagini){
+
+            foreach($immagini as $immagine){
+                
+                $img = new Immagine();
+                $img->ricambio_id = $ricambio->id;
+                $img->save();
+                
+                
+                $nome_img = $img->ricambio_id + $img->id.'.img';
+                $img->nome = $nome_img;
+                
+                $img->save();
+                
+                $destinationPath = 'storage/img/';
+                
+                $immagine->move($destinationPath, $nome_img);
+                
+            }
+            
+            
+        }
+        
+        $modelli_id = $request->modelli_id;
+        //dd($request->modelli_id);
+        foreach($modelli_id as $modello_id){
+            $modello_compatibile = new ModelloCompatibile();
+            $modello_compatibile->ricambio_id = $ricambio->id;
+            $modello_compatibile->modello_id = $modello_id;
+            $modello_compatibile->save();
+        }
         return redirect(route('vistaRicambi'));
+    }
+
+    public function eliminaImmagine(Immagine $immagine){
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+        $immagine->delete();
+        return redirect()->back();
+
+    }
+
+    public function eliminaModelloCompatibile(ModelloCompatibile $modello_compatibile){
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+        $modello_compatibile->delete();
+
+        return redirect()->back();
+
     }
 
     public function eliminaRicambio(Ricambio $ricambio ){
@@ -292,12 +351,28 @@ class FornitoriController extends Controller
         if (Gate::denies('Gestore')) {
             abort(403);            
         } 
-
+        
         $categoria->descrizione = $request->descrizione;
-        $categoria->img = $request->file('img')->store('public/img');
-    
+        
+        if($request->file('img')->store('public/img')){
+            $categoria->img = $request->file('img')->store('public/img');
+        }
         $categoria->save();
+        
         return redirect(route('vistaCategorie'));
+    }
+
+    public function eliminaImmagineCategoria(Categoria $categoria){
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+       
+        if(\Storage::exists($categoria->img)){
+            \Storage::delete($categoria->img);
+        }
+       
+        return redirect()->back();
+
     }
 
     public function eliminaCategoria(Categoria $categoria ){

@@ -1,5 +1,5 @@
 <x-layout>
-<h1>Fornitori:</h1>
+    <h1>Fornitori:</h1>
     <div class="container-fluid">
         
         <table class="table">

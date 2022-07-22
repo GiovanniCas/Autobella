@@ -45,7 +45,19 @@
                 <input type="file" class="form-control" id="exampleInputImg" aria-describedby="emailHelp" name="img">
             </div>
           
-            <button type="submit" class="btn btn-primary">Modifica</button>
+            <button type="submit" class="btn btn-primary mt-5">Modifica</button>
         </form>
+        
+            <div class="d-flex mt-5">
+                <h3>Immagine copertina</h3>
+                <br>
+                <form action="{{route('eliminaImmagineModello' , compact('modello'))}}" method="post">
+                    <button class="btn text-danger">X</button>
+                    @csrf
+                    @method('delete')
+                    <img src="{{Storage::url($modello->img)}}" style="height:150px; width: 200px;" alt="">
+                </form>
+            </div>
+      
     </div>
 </x-layout>

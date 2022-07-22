@@ -3,9 +3,9 @@
 @endphp
 <x-layout>
 
-    <h1>Marche</h1>
     @guest
-        <div class="container">
+    <div class="container">
+            <h1>Marche</h1>
             <div class="row">
                 @foreach($marche as $marca)
                     <div class="col-12 col-sm-6 col-md-3">
@@ -27,13 +27,14 @@
         </div>
     @endguest    
     @if(Auth::user())
+        <h1>Marche</h1>
         <div class="container-fluid">
-            
             <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">Nome </th>
                         <th scope="col">Numero Modelli</th>
+                        <th scope="col">Immagine</th>
                         <th scope="col">Azioni</th>
                     </tr>
                 </thead>
@@ -42,7 +43,13 @@
                         <tr>
                             <th scope="row">{{$marca->nome}}</th>
                             <td>{{count(Modello::all()->where('marca_id' , $marca->id))}}</td>
-                          
+                            <td>
+                                @if($marca->img)
+                                    Si
+                                @else 
+                                    No
+                                @endif        
+                            </td>
                             <td>
                                 <div class="d-flex">
                                     <form href="{{route('vistaModificaMarca' , compact('marca'))}}" method="get"> 

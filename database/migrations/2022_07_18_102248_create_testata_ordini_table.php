@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string("indirizzo")->nullable();
             $table->string("cap")->nullable();
             $table->string("email")->nullable();
-            $table->string("totale")->nullable();
+            $table->decimal("totale")->nullable();
             $table->timestamps();
         });
     }

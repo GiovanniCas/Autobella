@@ -1,6 +1,6 @@
 <x-layout>
     <div class="container">
-        <h1>Aggiungi nuova categoria</h1>
+        <h1>Aggiungi nuova marca</h1>
         <form action="{{route('aggiungiMarca')}}" method="post" enctype="multipart/form-data">
             @csrf
   

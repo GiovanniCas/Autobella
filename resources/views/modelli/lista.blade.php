@@ -1,8 +1,8 @@
-<x-layout>
 
-    <h1>Modelli</h1>
+<x-layout>
     @guest
-        <div class="container">
+    <div class="container">
+        <h1>Modelli</h1>
         <div class="row">
                 @foreach($modelli as $modello)
                     <div class="col-12 col-sm-6 col-md-3">
@@ -52,6 +52,7 @@
         </div>
     @endguest
     @if(Auth::user())
+        <h1>Modelli</h1>
         <div class="container-fluid">
             
             <table class="table">
@@ -61,6 +62,7 @@
                         <th scope="col">Marca</th>
                         <th scope="col">Anno di Produzione</th>
                         <th scope="col">Anno di anno_ritiro</th>                        
+                        <th scope="col">Immagini</th>                        
                         <th scope="col">Azioni</th>
                     </tr>
                 </thead>
@@ -71,6 +73,13 @@
                             <td>{{$modello->marche->nome}}</td>
                             <td>{{$modello->anno_produzione}}</td>
                             <td>{{$modello->anno_ritiro}}</td>
+                            <td>
+                                @if($modello->img)
+                                    Si
+                                @else 
+                                    No
+                                @endif        
+                            </td>
                             <td>
                                 <div class="d-flex">
                                     <form href="{{route('vistaModificaModello' , compact('modello'))}}" method="get"> 
