@@ -36,7 +36,7 @@
   object-fit: cover;
 }
 
-.aggiungi-al-carrello {
+/* .aggiungi-al-carrello {
   position: absolute;
   width: 100%;
   background-color: darkgray;
@@ -51,4 +51,50 @@
   opacity: 1;
   padding: 10px;
   text-decoration: none;
+} */
+
+
+/*--------------------- carrello --------------------*/
+/* .products-img {
+  height: 100px, width;100px
+} */
+.products-container {
+  justify-content: space-around;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.product-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 4px solid lightgray;
+  margin: 0 auto;
+}
+
+.product-title {
+  width : 33%;
+}
+
+.price {
+  width: 15%;
+ 
+  display: flex;
+  align-items: center;
+}
+
+.quantity {
+  width: 30%;
+  display: flex;
+  align-items: center;
+}
+
+.total {
+  width: 10%;
+  display: flex;
+  align-items: center;
+}
+
+.products{
+
 }

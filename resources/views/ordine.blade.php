@@ -34,6 +34,7 @@
                         <label for="exampleInputEmail" class="form-label">Email :</label>
                         <input type="email" class="form-control" name="email" aria-describedby="emailHelp" required>
                     </div>
+                    <h4>Totale : ${{$totale}}</h4>
                 
                     <button type="submit" class="btn btn-primary mt-3">Ordina</button>
                 </form>

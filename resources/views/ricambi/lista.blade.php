@@ -63,7 +63,7 @@
                                 @endif                                
                             </div>                         
                             <div class="card-body">
-                                <h5 class="card-title add-cart">{{$ricambio->nome}}</h5>
+                                <h5 class="card-title">{{$ricambio->nome}}</h5>
                                 <p class="card-title">{{$ricambio->descrizione}}</p>
                                 <p class="card-title">${{$ricambio->prezzo}}</p>
                                 <p class="card-title">{{$ricambio->fornitori->ragione_sociale}}</p>

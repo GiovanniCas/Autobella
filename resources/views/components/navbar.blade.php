@@ -1,3 +1,6 @@
+@php
+    use App\Models\RicambioOrdinato;
+@endphp
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="{{route('welcome')}}">Home</a>
@@ -21,7 +24,7 @@
       </li>
       @guest
         <li class="nav-item">
-            <a class="nav-link" href="{{route('carrello')}}"><i class="fa-solid fa-cart-shopping"></i></a>
+            <a class="nav-link" href="{{route('carrello')}}"><i class="fa-solid fa-cart-shopping"></i><span> {{count(RicambioOrdinato::where('testata_id' , session('testata_id'))->get())}}</span></a>
           </li>
         <li class="nav-item">
           <a class="nav-link" href="{{route('login')}}">Login</a>

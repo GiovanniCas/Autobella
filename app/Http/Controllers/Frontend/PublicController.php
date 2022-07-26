@@ -39,8 +39,12 @@ class PublicController extends Controller
 
     public function carrello(){
         $ricambi_nel_carrello = RicambioOrdinato::where('testata_id' , session('testata_id'))->get();
- 
-        return view('carrello')->with(compact('ricambi_nel_carrello'));
+        $totale = 0;
+        foreach($ricambi_nel_carrello as $ricambio_nel_carrello){
+            $tot = $ricambio_nel_carrello->quantita * $ricambio_nel_carrello->prezzo_unitario;
+            $totale += $tot;
+        }
+        return view('carrello')->with(compact('ricambi_nel_carrello'))->with(compact('totale'));
     }
 
     public function aggiungiAlCarrello(Request $request){
@@ -103,6 +107,7 @@ class PublicController extends Controller
         
         if(count($ricambi_nel_carrello) > 0) {
             
+          
             return redirect(route('ordine'));
         } else {
             
@@ -113,7 +118,12 @@ class PublicController extends Controller
 
     public function ordine(){
         $ricambi = RicambioOrdinato::where('testata_id' , session('testata_id'))->get();
-        return view('ordine' , compact('ricambi'));
+        $totale = 0;
+        foreach($ricambi as $ricambio){
+            $tot = $ricambio->quantita * $ricambio->prezzo_unitario;
+            $totale += $tot;
+        }
+        return view('ordine' , compact('ricambi'))->with(compact('totale'));
     }
         
     public function confermaOrdine(Request $request){

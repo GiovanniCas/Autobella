@@ -9,9 +9,6 @@ let swiper = new Swiper(".mySwiper", {
     },
   });
 
-console.log('ciao');
-let carrello = document.querySelectorAll('add-cart');
-
 
 
 
