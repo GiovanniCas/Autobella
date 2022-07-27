@@ -14,12 +14,12 @@
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Autobella</title>
 </head>
-<body class="mio-sfondo wh-100" style="background-image: url('/sfondo.jpg');  ">
+<body class="mio-sfondo" style="background-image: url('/sfondo.jpg');  ">
     <x-navbar/>
     <div class="mt-5">
 
+        </div>
         {{$slot}}
-    </div>
 
     
     @vite('resources/js/app.js')

@@ -1,15 +1,15 @@
 <x-layout>
     <div class="container">
-        <h1>Modifica marca</h1>
+        <h1 class="color-brown">Modifica marca</h1>
         <form action="{{route('modificaMarca' , compact('marca'))}}" method="post" enctype="multipart/form-data">
             @method('put')
             @csrf
   
-            <div class="mb-3">
+            <div class="my-3" style="width:45%">
                 <label for="exampleInputNome" class="form-label">Nome:</label>
                 <input type="text" class="form-control" id="exampleInputNome" aria-describedby="emailHelp" value="{{$marca->nome}}" name="nome" required>
             </div>
-            <div>
+            <div style="width:45%">
                 <label for="exampleInputImg" class="form-label">Immagine:</label>
                 <input type="file" class="form-control" id="exampleInputImg" aria-describedby="emailHelp" name="img" required>
             </div>

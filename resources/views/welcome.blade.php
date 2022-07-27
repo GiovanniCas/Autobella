@@ -1,7 +1,7 @@
 <x-layout>
     
-    <h1>Tutti i ricambi in un click!</h1>
-
+    
+    <h1 class="text-center color-brown" style="margin-top:160px">Tutti i ricambi in un click!</h1>
     <div class=" container mt-5">
         <div class="row mt-5">
             <form method="post" action="{{route('cercaRicambiCompatibili')}}" class="d-flex mt-5">

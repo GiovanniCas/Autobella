@@ -25,6 +25,9 @@ class Ricambio extends Model
         'prezzo',
     ]; 
 
+    const STATO_ABILITATO = 1;
+    const STATO_DISABILITATO =2;
+
     public function categorie(){
         return $this->belongsTo(Categoria::class , 'categoria_id');
     }

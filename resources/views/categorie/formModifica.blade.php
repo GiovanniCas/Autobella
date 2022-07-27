@@ -1,20 +1,20 @@
 <x-layout>
     <div class="container">
-        <h1>Modifica  categoria</h1>
+        <h1 class="color-brown">Modifica  categoria</h1>
         <form action="{{route('modificaCategoria' , compact('categoria'))}}" method="POST" enctype="multipart/form-data">
             @method('put')
             @csrf
   
-            <div class="mb-3">
+            <div class="mb-3" style="width: 45%">
                 <label for="exampleInputdescrizione" class="form-label">Descrizione:</label>
                 <input type="text" class="form-control" id="exampleInputdescrizione" aria-describedby="emailHelp" value="{{$categoria->descrizione}}" name="descrizione">
             </div>
-            <div>
+            <div style="width: 45%">
                 <label for="exampleInputImg" class="form-label">Immagine:</label>
                 <input type="file" class="form-control" id="exampleInputImg" value="{{$categoria->img}}" aria-describedby="emailHelp" name="img" required>
             </div>
           
-            <button type="submit" class="btn btn-primary mt-3">Modifica</button>
+            <button type="submit" class="btn btn-primary mt-5">Modifica</button>
         </form>
         
             <div class="d-flex mt-5">

@@ -1,5 +1,4 @@
 .mio-sfondo{
-    height: 100vh ;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -67,7 +66,7 @@
 .product-header {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   border-bottom: 4px solid lightgray;
   margin: 0 auto;
 }
@@ -95,6 +94,6 @@
   align-items: center;
 }
 
-.products{
-
+.color-brown{
+  color: brown;
 }

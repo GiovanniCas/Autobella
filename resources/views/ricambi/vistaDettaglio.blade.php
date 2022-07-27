@@ -5,7 +5,7 @@
 <x-layout>
 
     <div class="container">
-        <h1 class="card-title">{{$ricambio->nome}}</h1>
+        <h1 class="card-title color-brown">{{$ricambio->nome}}</h1>
         <form action="{{route('aggiungiAlCarrello')}}" method="post" >
             @csrf   
             <div class="row">
@@ -24,11 +24,11 @@
                         <div class="swiper-pagination"></div>
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
-                    <h3 class="card-title">Descrizione: {{$ricambio->descrizione}}</h3>
-                    <h3 class="card-title">Prezzo: ${{$ricambio->prezzo}}</h3>
-                    <h3 class="card-title">Fornitore: {{$ricambio->fornitori->ragione_sociale}}</h3>
-                    <h3 class="card-title">Categoria: {{$ricambio->categorie->descrizione}}</h3>
+                <div class="col-3 color-brown">
+                    <h3 class="card-title">Descrizione: </h3>
+                    <h3 class="card-title">Prezzo: </h3>
+                    <h3 class="card-title">Fornitore: </h3>
+                    <h3 class="card-title">Categoria: </h3>
                     <br>
                     <br>
                     <h3>Compatibile con:</h3>
@@ -39,9 +39,18 @@
                     @endforeach  
                     <div class="mt-5">
                         <label for="inputQuantity">Quantita :</label>
-                        <input type="number" min="0" name="quantita[{{$ricambio->id}}]" > <br>
+                        <input type="number" min="1" value="1" name="quantita[{{$ricambio->id}}]" > <br>
                     </div>
                     <button type="submit" class="btn btn-info mt-3">Aggiungi al carrello</button>
+                </div>
+                <div class="col-3">
+                <h3 class="card-title">{{$ricambio->descrizione}}</h3>
+                    <h3 class="card-title">${{$ricambio->prezzo}}</h3>
+                    <h3 class="card-title">{{$ricambio->fornitori->ragione_sociale}}</h3>
+                    <h3 class="card-title">{{$ricambio->categorie->descrizione}}</h3>
+                    <br>
+                    <br>
+              
                 </div>
             </div>
         </form>
@@ -50,7 +59,7 @@
     @if(count(session('visti_di_recente')) >1 )
     
         <div class="container mt-5">
-            <h3>Visti di recente:</h3>
+            <h3 class="color-brown">Visti di recente:</h3>
             <div class="row">
           
                 @foreach($visti_di_recente as $visto_di_recente)

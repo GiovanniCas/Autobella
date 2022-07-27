@@ -17,7 +17,7 @@ class OrdiniController extends Controller
 
         $ordini = Testata::where('stato' , '!=' , 0)->orderBy('data' , 'desc')->get();
         
-        return view('listaOrdini' , compact('ordini'));
+        return view('listaOrdiniGestore.listaOrdini' , compact('ordini'));
     }
 
     public function ordineSpedito(Testata $ordine){

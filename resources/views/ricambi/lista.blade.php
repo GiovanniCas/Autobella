@@ -5,10 +5,12 @@
 
 <x-layout>
     <div class=" container mt-3">
-        <h1>Prodotti</h1>
-        <div class="row">
-            <h3>Filtra per</h3>
-            <form method="post" action="{{route('cercaRicambiCompatibili')}}" class="d-flex">
+        <h1 class="color-brown" >Prodotti</h1>
+        <div class="row d-flex">
+            <div >
+                <h3 class="color-brown">Filtra per</h3>
+            </div>
+            <form method="post" action="{{route('cercaRicambiCompatibili')}}" class="d-flex" >
                 @csrf
                 <div class="col-md-3">
                     <h5>Marca :</h5>
@@ -43,23 +45,23 @@
                         <input class="form-control me-2" type="search" placeholder="Inserisci AnnoProduzione" aria-label="Search" style="height: 40px; width: 100%;" name="cercaAnnoProduzione">
                     @endif 
                 </div>
-                
                 <button class="btn btn-outline-dark my-btn" style="height: 40px; margin-top: auto;" type="submit"><i class="fa-solid fa-magnifying-glass text-dark"></i></button>
+                
             </form>
         </div>    
     </div>
     @guest
         <div class="container mt-5">
-            @csrf   
+        
             <div class="row">
                 @foreach($ricambi as $ricambio)
                 <div class="col-12 col-sm-6 col-md-3">
                     <form action="{{route('aggiungiAlCarrello')}}" method="post" >
                         @csrf
-                        <div class="card mt-3" style="width: 90%; height: 466px;">
-                            <div>
+                        <div class="card mt-3" style="width: 90%; height: 412px;">
+                            <div style="height: 180px;">
                                 @if($ricambio->trovaImmagine())
-                                    <img src="/storage/img/{{$ricambio->trovaImmagine()->nome}}" class="d-block w-100"  style="height: 180px;" alt="...">
+                                    <img src="/storage/img/{{$ricambio->trovaImmagine()->nome}}" class="d-block w-100" style="height: 180px;"  alt="...">
                                 @endif                                
                             </div>                         
                             <div class="card-body">
@@ -76,7 +78,7 @@
                                 
                             </div>
                             <!-- <a class="aggiungi-al-carrello cart" type="submit" >Aggiungi al Carrello</a> -->
-                            <div class="d-flex justify-content-between">
+                            <!-- <div class="d-flex justify-content-between">
                                 <div style="width: 80%;">
                                     <label for="inputQuantity">Quantita :</label>
                                     <input type="number" min="0" name="quantita[{{$ricambio->id}}]" >
@@ -84,7 +86,7 @@
                                 <div style="width: 80%;" class="d-flex justify-content-end add-cart">
                                     <button type="submit" class="btn btn-info" style="margin-top: 21px; height: 34px;"><i class="fa-solid fa-cart-shopping"></i></button>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </form>
                     
@@ -96,10 +98,28 @@
 
     @if(Auth::user())
         <div class="container-fluid mt-5">
-            
+            @if (session('error'))
+                @php 
+                    $ricambio = session('ricambio')
+                @endphp    
+                <div class="alert alert-success d-flex" id="box-avviso" role="alert">
+                    {{ session('error') }}
+                    <div>
+                        <form action="{{route('disabilitaRicambio' , compact('ricambio'))}}" method="post">
+                        @method('put')
+                        @csrf
+                        <button type="submit" style="border: none; color: green; background: bottom;"><i class="fa-solid fa-check"  style="margin-left:100px"></i></button>
+                        </form>
+                    </div>
+                    <div>
+                        <button onclick="myFunction()" style="border: none; color: red; background: bottom;"><i class="fa-solid fa-xmark text-danger" style="margin-left:50px"></i></button>
+                    </div>
+                </div>
+            @endif
+            @csrf   
             <table class="table">
                 <thead>
-                    <tr>
+                    <tr class="color-brown">
                         <th scope="col">Nome Pezzo</th>
                         <th scope="col">Fornitore</th>
                         <th scope="col">Categoria</th>
@@ -144,4 +164,12 @@
         <a href="{{route('vistaAggiungiRicambi')}}" class="btn btn-danger mt-5">Aggiungi Nuovo</a>
     @endif
 
+    <script>
+        let box = document.getElementById('box-avviso');
+        function myFunction(){
+            box.classList.add("d-none");
+
+        }
+     
+    </script>
 </x-layout>

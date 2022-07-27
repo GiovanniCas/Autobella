@@ -1,6 +1,6 @@
 <x-layout>
     <div class="container">
-        <h1>Modifica Ricambio:</h1>
+        <h1 class="color-brown">Modifica Ricambio:</h1>
         <div class="row">
             <div class="col-12 col-md-6">
 
@@ -56,7 +56,7 @@
                         <input type="file" class="form-control" name="immagini[]" placeholder="Aggiungi qui le tue Immagini" multiple> 
                     </div>
                     
-                    <button type="submit" class="btn btn-primary">Modifica</button>
+                    <button type="submit" class="btn btn-primary mt-3">Modifica</button>
                 
             </form>
             </div>

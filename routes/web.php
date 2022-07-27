@@ -33,6 +33,8 @@ Route::prefix('/admin')->group(function () {
     Route::delete('/elimina/immagine/{immagine}' , [FornitoriController::class , 'eliminaImmagine'])->name('eliminaImmagine');
     //elimina immagine correlata
     Route::delete('/elimina/modello/compatibile/{modello_compatibile}' , [FornitoriController::class , 'eliminaModelloCompatibile'])->name('eliminaModelloCompatibile');
+    //disabilita ricambio
+    Route::put('/disabilita/ricambio/{ricambio}' , [FornitoriController::class , 'disabilitaRicambio'])->name('disabilitaRicambio');
 
 
     //rotte per fornitori

@@ -1,13 +1,15 @@
 
 <x-layout>
     @guest
-    <div class="container">
-        <h1>Modelli</h1>
+    <div class="container" style="margin-top:160px">
+        <h1 class="color-brown">Modelli</h1>
         <div class="row">
                 @foreach($modelli as $modello)
-                    <div class="col-12 col-sm-6 col-md-3">
+                    <div class="col-12 col-sm-6 col-md-3 mt-5">
                         <div class="card" style="width: 18rem;">
-                            <img src="{{Storage::url($modello->img)}}" class="card-img-top" alt="...">
+                            <div style="height: 180px;">
+                                <img src="{{Storage::url($modello->img)}}" class="card-img-top" style="height: 180px;" alt="...">
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">{{$modello->anno_produzione}}</h5>
                                 <h5 class="card-title">{{$modello->anno_ritiro}}</h5>
@@ -52,16 +54,16 @@
         </div>
     @endguest
     @if(Auth::user())
-        <h1>Modelli</h1>
+        <h1 class="color-brown">Modelli</h1>
         <div class="container-fluid">
             
             <table class="table">
                 <thead>
-                    <tr>
+                    <tr class="color-brown">
                         <th scope="col">Nome </th>
                         <th scope="col">Marca</th>
                         <th scope="col">Anno di Produzione</th>
-                        <th scope="col">Anno di anno_ritiro</th>                        
+                        <th scope="col">Anno di Ritiro</th>                        
                         <th scope="col">Immagini</th>                        
                         <th scope="col">Azioni</th>
                     </tr>
@@ -96,7 +98,7 @@
                     @endforeach    
                 </tbody>
             </table>
-            <a href="{{route('vistaAggiungiModello')}}" class="btn btn-danger">Aggiungi Modello</a>
+            <a href="{{route('vistaAggiungiModello')}}" class="btn btn-danger mt-5">Aggiungi Modello</a>
         </div>
     @endif
     

@@ -1,10 +1,10 @@
 <x-layout>
-    <h1>Fornitori:</h1>
+    <h1 class="color-brown">Fornitori:</h1>
     <div class="container-fluid">
         
         <table class="table">
             <thead>
-                <tr>
+                <tr class="color-brown">
                     <th scope="col">Ragione Sociale</th>
                     <th scope="col">Indirizzo</th>
                     <th scope="col">Comune</th>
@@ -41,6 +41,6 @@
                 @endforeach    
             </tbody>
         </table>
-        <a href="{{route('aggiungiFornitore')}}" class="btn btn-danger">Aggiungi Fornitore</a>
+        <a href="{{route('aggiungiFornitore')}}" class="btn btn-danger mt-5">Aggiungi Fornitore</a>
     </div>
 </x-layout>

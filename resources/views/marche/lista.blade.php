@@ -4,13 +4,13 @@
 <x-layout>
 
     @guest
-    <div class="container">
-            <h1>Marche</h1>
+    <div class="container" style="margin-top:160px">
+            <h1 class="color-brown">Marche</h1>
             <div class="row">
                 @foreach($marche as $marca)
-                    <div class="col-12 col-sm-6 col-md-3">
-                        <div class="card" style="width: 18rem;">
-                            <img src="{{Storage::url($marca->img)}}" class="card-img-top" alt="...">
+                    <div class="col-12 col-sm-6 col-md-3 mt-5">
+                        <div class="card" style="width: 18rem; ">
+                            <img src="{{Storage::url($marca->img)}}" class="card-img-top" style="height: 190px;" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{$marca->nome}}</h5>
                                 
@@ -27,11 +27,11 @@
         </div>
     @endguest    
     @if(Auth::user())
-        <h1>Marche</h1>
+        <h1 class="color-brown">Marche</h1>
         <div class="container-fluid">
             <table class="table">
                 <thead>
-                    <tr>
+                    <tr class="color-brown">
                         <th scope="col">Nome </th>
                         <th scope="col">Numero Modelli</th>
                         <th scope="col">Immagine</th>
@@ -67,7 +67,7 @@
                     @endforeach    
                 </tbody>
             </table>
-            <a href="{{route('vistaAggiungiMarca')}}" class="btn btn-danger">Aggiungi Marca</a>
+            <a href="{{route('vistaAggiungiMarca')}}" class="btn btn-danger mt-5">Aggiungi Marca</a>
         </div>
     @endif    
 </x-layout>

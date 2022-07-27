@@ -10,9 +10,11 @@ use App\Models\Ricambio;
 use App\Models\Categoria;
 use App\Models\Fornitore;
 use Illuminate\Http\Request;
+use App\Models\RicambioOrdinato;
 use App\Models\ModelloCompatibile;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Database\Eloquent\Builder;
 
 
@@ -88,7 +90,7 @@ class FornitoriController extends Controller
     public function vistaRicambi(){
 
         $immagini = Immagine::all();
-        $ricambi = Ricambio::all();
+        $ricambi = Ricambio::all()->where('stato' , Ricambio::STATO_ABILITATO);
         $fornitori = Fornitore::all();
         
         //$modelli_compatibili = Ricambio::find(6)->modelli()->get();
@@ -299,14 +301,35 @@ class FornitoriController extends Controller
 
     }
 
-    public function eliminaRicambio(Ricambio $ricambio ){
-
+    public function disabilitaRicambio(Ricambio $ricambio){
         if (Gate::denies('Gestore')) {
             abort(403);            
         } 
+        $ricambio->stato = Ricambio::STATO_DISABILITATO;
+        $ricambio->save();
+        return redirect(route('vistaRicambi'));
+    }
+
+    public function eliminaRicambio(Ricambio $ricambio){
+
+        $ricambi_ordinati = RicambioOrdinato::where('ricambio_id' , $ricambio->id)->get();
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+    
+        if(!$ricambi_ordinati->isEmpty()){
+            
+            
+            session()->put('ricambio' , $ricambio);
+            Session::flash('error', 'Non è possibile eliminare il ricambio perchè legato a uno o più ordini. Vuoi toglierlo lo stesso dalla vendita?');
+            return redirect(route('vistaRicambi'));
+        }
         
         $ricambio->delete();
-        return redirect(route('vistaRicambi'));
+        return redirect()->back();
+            
+        
+        
     }
 
     public function vistaCategorie(){

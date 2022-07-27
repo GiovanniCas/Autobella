@@ -4,11 +4,11 @@
 <x-layout>
 <div class="container">
         <h1>Carrello</h1>
-        <div class="product-header">
-                <h5 class="product-title">Nome</h5>
-                <h5 class="price">Prezzo</h5>
-                <h5 class="quantity">Quantità</h5>
-                <h5 class="totalprice">Totale</h5>
+        <div class="product-header" style="">
+                <h5 class="product-title" style="width: 20%; padding-left:125px;">Nome</h5>
+                <h5 class="price d-flex justify-content-end" style="width: 20%; margin-right: 90px">Prezzo</h5>
+                <h5 class="quantity d-flex justify-content-end" style="width: 20%; margin-right: 70px">Quantità</h5>
+                <h5 class="totalprice d-flex justify-content-end" style="width: 20%; margin-right: 10px; padding-right: 17px;">Totale</h5>
             </div>
         <form action="{{route('modificaQuantitaDesiderate')}}" method="post" >
         @method('put')
@@ -28,28 +28,34 @@
                                 @endif 
                             </div>
                             <div class="card-body d-flex justify-content-between">
-                                <h5 class="card-title">{{$ricambio_nel_carrello->ricambi->nome}}</h5>
-                                <h5 class="card-title">{{$ricambio_nel_carrello->ricambi->descrizione}}</h5>
-                                <h5 class="card-prezzo">${{$ricambio_nel_carrello->ricambi->prezzo}}
+                                <h5 class="card-title" style="width: 20%;">{{$ricambio_nel_carrello->ricambi->nome}}</h5>
+                              
+                                <h5 class="card-prezzo" style="width: 20%;">${{$ricambio_nel_carrello->ricambi->prezzo}}
                                 </h5>
-                                <div>
+                                <div style="width: 20%;">
 
                                     <label for="inputQuantity"></label>
                                     <input id="{{ $ricambio_nel_carrello->id }}-input" class="card-quantita" type="number" min="0" value="{{$ricambio_nel_carrello->quantita}}" name="quantita[{{$ricambio_nel_carrello->id}}]" style="width : 25%;">
                                 </div>
-                            
-                                <h4> $
-                                    <span id="{{ $ricambio_nel_carrello->id }}-price" class="costo-attuale">
-                                        {{ $ricambio_nel_carrello->prezzo_unitario * $ricambio_nel_carrello->quantita }}
-                                    </span>
-                                </h4>  
+                                <div style="width: 60px;">
+                                    <h4 class="d-flex" style="width: 20%;"> $
+                                        <span id="{{ $ricambio_nel_carrello->id }}-price" class="costo-attuale">
+                                            {{ $ricambio_nel_carrello->prezzo_unitario * $ricambio_nel_carrello->quantita }}
+                                        </span>
+                                    </h4>  
+                                </div>
                             </div>
                         </div>
                     </div>  
-                @endforeach    
-                <h3><span class="total"> </span></h3>
-                <!-- <h2><span id="total">Totale : ${{$totale}}</span></h2> -->
-                <button type="submit" class="btn btn-info mt-5">Procedi con l'ordine</button>
+                @endforeach   
+                <div class=" d-flex justify-content-end">
+                    <h3 class="totale"> </span></h3>
+                    
+                </div> 
+                <div class=" d-flex justify-content-end ">
+                    <button type="submit" class="btn btn-info mt-3">Procedi con l'ordine</button>
+                </div> 
+                
             </div>
         </form>
     </div>
@@ -77,9 +83,9 @@
                 let prezzo = parseFloat(prezzo_ricambio.innerText.replace('$' , ''));
                 
                 totale = totale + prezzo ;
-                console.log(totale);
+    
             }
-            document.getElementsByClassName('total')[0].innerText = 'Totale : $' + totale;
+            document.getElementsByClassName('totale')[0].innerText = 'Totale : $' + totale;
 
             totale = 0;
 

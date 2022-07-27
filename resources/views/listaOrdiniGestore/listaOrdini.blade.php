@@ -2,12 +2,12 @@
     use App\Models\Testata;
 @endphp
 <x-layout>
-    <h1>Lista Ordini:</h1>
+    <h1 class="color-brown">Lista Ordini:</h1>
     <div class="container-fluid">
             
             <table class="table">
                 <thead>
-                    <tr>
+                    <tr class="color-brown">
                         <th scope="col">Nome</th>
                         <th scope="col">Cognome</th>
                         <th scope="col">Città</th>

@@ -17,6 +17,8 @@ class RicambioOrdinato extends Model
     [
         'ricambio_id',
         'testata_id',
+        'nome_ricambio',
+        'codice_ricambio',
         'quantita',
         'prezzo_unitario',
     ];

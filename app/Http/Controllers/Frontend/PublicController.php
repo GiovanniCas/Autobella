@@ -47,7 +47,7 @@ class PublicController extends Controller
         return view('carrello')->with(compact('ricambi_nel_carrello'))->with(compact('totale'));
     }
 
-    public function aggiungiAlCarrello(Request $request){
+    public function aggiungiAlCarrello(Ricambio $ricambio ,Request $request){
         
         $quantita_selezionate = $request->input(['quantita']);
         if(!session('testata_id')){
@@ -66,10 +66,14 @@ class PublicController extends Controller
                     
                 }else{
                     $prezzo= Ricambio::where('id' , $id_ricambio)->value('prezzo');
+                    $nome= Ricambio::where('id' , $id_ricambio)->value('nome');
+                    $codice= Ricambio::where('id' , $id_ricambio)->value('codice_pezzo');
                     
                     $ricambio = RicambioOrdinato::create([
                         'ricambio_id' => $id_ricambio,
                         'testata_id' => session('testata_id'),
+                        'nome_ricambio' => $nome,
+                        'codice_ricambio' => $codice,
                         'quantita' => $quantita_selezionata ,
                         'prezzo_unitario' => $prezzo,
                     ]);
@@ -88,7 +92,9 @@ class PublicController extends Controller
     public function modificaQuantitaDesiderate(Request $request){
 
         $quantita_selezionate = $request->input(['quantita']);
-        //dd($quantita_selezionate);
+        if($quantita_selezionate === null){
+            return redirect(route('welcome'));
+        };
 
         foreach( $quantita_selezionate as $id_ricambio_selezionato => $nuova_quantita){
             
@@ -104,12 +110,12 @@ class PublicController extends Controller
         }
 
         $ricambi_nel_carrello = RicambioOrdinato::all()->where('testata_id', session('testata_id'));//->where('quantity', 0);
-        
         if(count($ricambi_nel_carrello) > 0) {
             
-          
+            
             return redirect(route('ordine'));
         } else {
+           
             
             return redirect(route('welcome'));
         };
@@ -123,6 +129,7 @@ class PublicController extends Controller
             $tot = $ricambio->quantita * $ricambio->prezzo_unitario;
             $totale += $tot;
         }
+        
         return view('ordine' , compact('ricambi'))->with(compact('totale'));
     }
         
