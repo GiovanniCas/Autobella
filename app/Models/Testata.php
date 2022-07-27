@@ -14,6 +14,7 @@ class Testata extends Model
 
     protected $fillable =
     [
+        'user_id',
         'nome',
         'cognome',
         'citta',

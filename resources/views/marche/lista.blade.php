@@ -25,8 +25,31 @@
             </div>
             
         </div>
-    @endguest    
-    @if(Auth::user())
+    @endguest  
+    @can('Utente')
+    <div class="container" style="margin-top:160px">
+            <h1 class="color-brown">Marche</h1>
+            <div class="row">
+                @foreach($marche as $marca)
+                    <div class="col-12 col-sm-6 col-md-3 mt-5">
+                        <div class="card" style="width: 18rem; ">
+                            <img src="{{Storage::url($marca->img)}}" class="card-img-top" style="height: 190px;" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{$marca->nome}}</h5>
+                                
+                                
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                @endforeach    
+            </div>
+            
+        </div>
+    @endcan   
+    @can('Gestore')
         <h1 class="color-brown">Marche</h1>
         <div class="container-fluid">
             <table class="table">
@@ -69,5 +92,5 @@
             </table>
             <a href="{{route('vistaAggiungiMarca')}}" class="btn btn-danger mt-5">Aggiungi Marca</a>
         </div>
-    @endif    
+    @endcan    
 </x-layout>

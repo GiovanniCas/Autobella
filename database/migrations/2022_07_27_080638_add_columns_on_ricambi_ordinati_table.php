@@ -28,7 +28,11 @@ return new class extends Migration
      */
     public function down()
     {
-        $table->dropColumn('nome_ricambio');
-        $table->dropColumn('codice_ricambio');
+        Schema::table('ricambi_ordinati', function (Blueprint $table) {
+        
+            $table->dropColumn('nome_ricambio');
+            $table->dropColumn('codice_ricambio');
+       
+        });
     }
 };

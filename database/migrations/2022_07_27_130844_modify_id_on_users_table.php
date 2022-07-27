@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('ricambi', function (Blueprint $table) {
-            $table->integer('stato')->after('prezzo')->default(1);
+        Schema::table('users', function (Blueprint $table) {
+            $table->id()->nullable()->change();
+            
         });
     }
 
@@ -25,10 +26,10 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('ricambi', function (Blueprint $table) {
-           
-            $table->dropColumn('stato');
+        Schema::table('users', function (Blueprint $table) {
+            $table->id()->change();
+            
         });
-    
+       
     }
 };

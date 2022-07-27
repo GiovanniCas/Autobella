@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Backend\OrdiniController;
 use App\Http\Controllers\Backend\VettureController;
 use App\Http\Controllers\Frontend\PublicController;
@@ -18,6 +19,8 @@ use App\Http\Controllers\Backend\FornitoriController;
     Route::post('/conferma/ordine' , [PublicController::class , "confermaOrdine"])->name("confermaOrdine");
     Route::get('/vista/dettaglio/{ricambio}' , [PublicController::class , "vistaDettaglio"])->name("vistaDettaglio");
 
+//i miei ordini (utente reistrato)
+    Route::get('/storico/ordini' , [UserController::class , 'storicoOrdini'])->name('storicoOrdini');
 
 
 

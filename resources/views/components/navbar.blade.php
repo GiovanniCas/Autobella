@@ -22,20 +22,28 @@
       <li class="nav-item">
         <a class="nav-link" href="{{route('vistaMarche')}}">Marche</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('carrello')}}"><i class="fa-solid fa-cart-shopping"></i><span> {{count(RicambioOrdinato::where('testata_id' , session('testata_id'))->get())}}</span></a>
+      </li>
       @guest
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('carrello')}}"><i class="fa-solid fa-cart-shopping"></i><span> {{count(RicambioOrdinato::where('testata_id' , session('testata_id'))->get())}}</span></a>
-          </li>
         <li class="nav-item">
           <a class="nav-link" href="{{route('login')}}">Login</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('register')}}">Registrati</a>
+        </li>
       @endguest
-      @if(Auth::user())
+      @can('Gestore')
         <li class="nav-item">
           <a class="nav-link" href="{{route('listaFornitori')}}">Fornitori</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{route('listaOrdini')}}">Ordini</a>
+        </li>
+      @endcan
+      @if(Auth::user())
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('storicoOrdini')}}">I Miei Ordini</a>
         </li>
         <li>
           <a class="nav-link" href="{{ route('logout') }}"onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
@@ -43,7 +51,7 @@
               @csrf
           </form>
         </li>
-      @endif
+      @endif  
     </div>
   </div>
 </nav>

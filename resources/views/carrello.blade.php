@@ -3,13 +3,13 @@
 @endphp
 <x-layout>
 <div class="container">
-        <h1>Carrello</h1>
-        <div class="product-header" style="">
-                <h5 class="product-title" style="width: 20%; padding-left:125px;">Nome</h5>
-                <h5 class="price d-flex justify-content-end" style="width: 20%; margin-right: 90px">Prezzo</h5>
-                <h5 class="quantity d-flex justify-content-end" style="width: 20%; margin-right: 70px">Quantità</h5>
-                <h5 class="totalprice d-flex justify-content-end" style="width: 20%; margin-right: 10px; padding-right: 17px;">Totale</h5>
-            </div>
+        <h1 class="color-brown">Carrello</h1>
+        <div class="product-header color-brown" style="">
+            <h5 class="product-title" style="width: 20%; padding-left:125px;">Nome</h5>
+            <h5 class="price d-flex justify-content-end" style="width: 20%; margin-right: 90px">Prezzo</h5>
+            <h5 class="quantity d-flex justify-content-end" style="width: 20%; margin-right: 70px">Quantità</h5>
+            <h5 class="totalprice d-flex justify-content-end" style="width: 20%; margin-right: 10px; padding-right: 17px;">Totale</h5>
+        </div>
         <form action="{{route('modificaQuantitaDesiderate')}}" method="post" >
         @method('put')
         @csrf   

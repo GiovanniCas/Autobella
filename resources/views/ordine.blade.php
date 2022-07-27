@@ -5,11 +5,17 @@
             <div class="col-12 col-md-6 mt-5">
                 <form method="POST" action="{{route('confermaOrdine')}}">
                     @csrf
+                    @if(Auth::user())
+                    <div class="mb-3">
+                        <label for="exampleInputName" class="form-label">Nome :</label>
+                        <input type="text" class="form-control" value="{{Auth::user()->name}}" name="nome" aria-describedby="emailHelp" required>
+                    </div>
+                    @else
                     <div class="mb-3">
                         <label for="exampleInputName" class="form-label">Nome :</label>
                         <input type="text" class="form-control" name="nome" aria-describedby="emailHelp" required>
                     </div>
-
+                    @endif
                     <div class="mb-3">
                         <label for="exampleInputSurname" class="form-label">Cognome :</label>
                         <input type="text" class="form-control" name="cognome" aria-describedby="emailHelp" required>
@@ -30,10 +36,17 @@
                         <input type="text" class="form-control" name="cap" aria-describedby="emailHelp" required>
                     </div>
 
+                    @if(Auth::user())
+                    <div class="mb-3">
+                        <label for="exampleInputEmail" class="form-label">Email :</label>
+                        <input type="email" class="form-control" value="{{Auth::user()->email}}" name="email" aria-describedby="emailHelp" required>
+                    </div>
+                    @else
                     <div class="mb-3">
                         <label for="exampleInputEmail" class="form-label">Email :</label>
                         <input type="email" class="form-control" name="email" aria-describedby="emailHelp" required>
                     </div>
+                    @endif
                     <h4>Totale : ${{$totale}}</h4>
                 
                     <button type="submit" class="btn btn-primary mt-3">Ordina</button>

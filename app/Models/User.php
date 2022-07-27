@@ -21,9 +21,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'ruolo',
     ];
 
     const GESTORE = 1;
+    const UTENTE_NORMALE = 2;
+    
 
     /**
      * The attributes that should be hidden for serialization.
@@ -43,4 +46,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function ricambiOrdinati(){
+        return $this->hasMany(RicambioOrdinato::class );
+    }
+
 }

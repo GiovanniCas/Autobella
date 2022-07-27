@@ -94,9 +94,41 @@
                 @endforeach    
             </div>
         </div>
-    @endguest
+    @endguest    
+    @can('Utente')
+        <div class="container mt-5">
+        
+            <div class="row">
+                @foreach($ricambi as $ricambio)
+                <div class="col-12 col-sm-6 col-md-3">
+                    <form action="{{route('aggiungiAlCarrello')}}" method="post" >
+                        @csrf
+                        <div class="card mt-3" style="width: 90%; height: 412px;">
+                            <div style="height: 180px;">
+                                @if($ricambio->trovaImmagine())
+                                    <img src="/storage/img/{{$ricambio->trovaImmagine()->nome}}" class="d-block w-100" style="height: 180px;"  alt="...">
+                                @endif                                
+                            </div>                         
+                            <div class="card-body">
+                                <h5 class="card-title">{{$ricambio->nome}}</h5>
+                                <p class="card-title">{{$ricambio->descrizione}}</p>
+                                <p class="card-title">${{$ricambio->prezzo}}</p>
+                                <p class="card-title">{{$ricambio->fornitori->ragione_sociale}}</p>
+                                <p class="card-title">{{$ricambio->categorie->descrizione}}</p>
+                                <a class="btn btn-primary" href="{{route('vistaDettaglio' , compact('ricambio'))}}">
+                                    Vai al Dettaglio
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+                @endforeach    
+            </div>
+        </div>
+    @endcan   
 
-    @if(Auth::user())
+    @can('Gestore')
         <div class="container-fluid mt-5">
             @if (session('error'))
                 @php 
@@ -162,7 +194,7 @@
             </table>
         </div>
         <a href="{{route('vistaAggiungiRicambi')}}" class="btn btn-danger mt-5">Aggiungi Nuovo</a>
-    @endif
+    @endcan
 
     <script>
         let box = document.getElementById('box-avviso');

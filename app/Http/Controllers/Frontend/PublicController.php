@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Models\RicambioOrdinato;
 use App\Models\ModelloCompatibile;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 
 class PublicController extends Controller
@@ -144,6 +145,7 @@ class PublicController extends Controller
         }
         
         $ordine = Testata::where('id' , session('testata_id'))->update([
+            'user_id' => Auth::user()->id,
             'name' => $request->input('nome'),
             'cognome' =>$request->input('cognome'),
             'citta' => $request->input('citta'),
