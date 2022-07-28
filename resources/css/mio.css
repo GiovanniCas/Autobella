@@ -1,6 +1,8 @@
 .mio-sfondo{
-    background-repeat: no-repeat;
-    background-size: cover;
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
 }
 
 .swiper {
@@ -35,30 +37,12 @@
   object-fit: cover;
 }
 
-/* .aggiungi-al-carrello {
-  position: absolute;
-  width: 100%;
-  background-color: darkgray;
-  transition: all 0.3s ease-in-out;
-  opacity: 0;
-  cursor: pointer;
-  text-align: center;
-}
-
-.ricambio-card:hover .cart{
-  bottom: 50px;
-  opacity: 1;
-  padding: 10px;
-  text-decoration: none;
-} */
 
 .navbar>.container-fluid{
   display: inline !important;
 }
 /*--------------------- carrello --------------------*/
-/* .products-img {
-  height: 100px, width;100px
-} */
+
 .products-container {
   justify-content: space-around;
   margin: 0 auto;
