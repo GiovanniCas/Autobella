@@ -135,9 +135,8 @@ class PublicController extends Controller
     }
         
     public function confermaOrdine(Request $request){
-        
         $ricambi = RicambioOrdinato::all()->where('testata_id' , session('testata_id'));
-            
+        
         $totale = 0;
         foreach($ricambi as $ricambio){
             $tot = $ricambio->quantita * $ricambio->prezzo_unitario;
@@ -145,7 +144,11 @@ class PublicController extends Controller
         }
         
         $ordine = Testata::where('id' , session('testata_id'))->update([
-            'user_id' => Auth::user()->id,
+            //optional: se il valore dentro le parentesi esiste allora mi prende di quel valore l'id;
+            //altrimenti mi ritorna null
+            'user_id' => optional(Auth::user())->id,
+            // null coalescing operator
+            // 'user_id' => Auth::user()?Auth::user()->id:null,
             'name' => $request->input('nome'),
             'cognome' =>$request->input('cognome'),
             'citta' => $request->input('citta'),
@@ -157,8 +160,8 @@ class PublicController extends Controller
             'data' => date("Y-m-d"),
         ]);  
         
-        
-        session()->flush();
+       
+        // session()->flush();
         
         
         return redirect(route('welcome'));

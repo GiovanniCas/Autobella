@@ -4,7 +4,7 @@
 @endphp
 <x-layout>
     <div class="container">
-        <h1> I Miei Ordini </h1>
+        <h1  class="color-brown"> I Miei Ordini </h1>
         <div class="product-header color-brown" style="">
             <h5 class="product-title" style="width: 20%; padding-left:125px;">Nome</h5>
             <h5 class="price d-flex justify-content-end" style="width: 20%; margin-right: 90px">Prezzo</h5>

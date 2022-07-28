@@ -52,7 +52,9 @@
   text-decoration: none;
 } */
 
-
+.navbar>.container-fluid{
+  display: inline !important;
+}
 /*--------------------- carrello --------------------*/
 /* .products-img {
   height: 100px, width;100px

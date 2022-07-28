@@ -109,4 +109,19 @@ class CategorieTest extends TestCase
         $response->assertStatus(403);
 
     }
+
+    // public function test_elimina_immagine_categoria()
+    // {
+    //     $user = User::factory()->create();     
+    //     $user2 = User::factory()->create(['ruolo' => 2]); 
+    //     Storage::fake('avatars');
+    //     $immagine = UploadedFile::fake()->image('avatar.jpg'); 
+    //     $categoria = Categoria::factory()->create(['img' => $immagine]);
+        
+    //     $response = $this->actingAs($user)->get(route('vistaModificaCategoria' , $categoria->id));
+    //     $response->assertStatus(200);
+
+    //     $response = $this->actingAs($user)->delete(route('eliminaImmagineCategoria' , $categoria->id));
+
+    // }
 }

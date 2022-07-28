@@ -36,9 +36,6 @@ class AuthServiceProvider extends ServiceProvider
             return $user->ruolo === User::UTENTE_NORMALE;
         });
 
-        Gate::define('Guest', function ($user) {
-            
-            return $user->ruolo === User::GUEST;
-        });
+       
     }
 }

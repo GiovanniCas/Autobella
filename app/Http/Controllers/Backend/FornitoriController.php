@@ -286,6 +286,7 @@ class FornitoriController extends Controller
         if (Gate::denies('Gestore')) {
             abort(403);            
         } 
+       
         $immagine->delete();
         return redirect()->back();
 
@@ -295,6 +296,8 @@ class FornitoriController extends Controller
         if (Gate::denies('Gestore')) {
             abort(403);            
         } 
+
+        
         $modello_compatibile->delete();
 
         return redirect()->back();
@@ -304,9 +307,11 @@ class FornitoriController extends Controller
     public function disabilitaRicambio(Ricambio $ricambio){
         if (Gate::denies('Gestore')) {
             abort(403);            
-        } 
+        }
         $ricambio->stato = Ricambio::STATO_DISABILITATO;
         $ricambio->save();
+        
+
         return redirect(route('vistaRicambi'));
     }
 
@@ -316,7 +321,6 @@ class FornitoriController extends Controller
         if (Gate::denies('Gestore')) {
             abort(403);            
         } 
-    
         if(!$ricambi_ordinati->isEmpty()){
             
             
@@ -324,6 +328,7 @@ class FornitoriController extends Controller
             Session::flash('error', 'Non è possibile eliminare il ricambio perchè legato a uno o più ordini. Vuoi toglierlo lo stesso dalla vendita?');
             return redirect(route('vistaRicambi'));
         }
+        
         
         $ricambio->delete();
         return redirect()->back();
@@ -389,11 +394,11 @@ class FornitoriController extends Controller
         if (Gate::denies('Gestore')) {
             abort(403);            
         } 
-       
         if(\Storage::exists($categoria->img)){
             \Storage::delete($categoria->img);
+            
         }
-       
+        
         return redirect()->back();
 
     }
