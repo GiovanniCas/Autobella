@@ -36,9 +36,9 @@
               <a class="nav-link" href="{{route('register')}}">Registrati</a>
             </li>
           @endguest  
-          @if(Auth::user())
+          @can('Utente')
             <a class="nav-link" href="{{route('storicoOrdini')}}">I Miei Ordini</a>
-          @endif  
+          @endcan  
           @can('Gestore')
             <li class="nav-item">
               <a class="nav-link" href="{{route('listaFornitori')}}">Fornitori</a>
@@ -50,17 +50,16 @@
          
         </div>
       </div>
-      <div class="col-3 d-flex justify-content-end" >
-       
-            <a class="nav-link" href="{{route('carrello')}}"><i class="fa-solid fa-cart-shopping"></i><span> {{count(RicambioOrdinato::where('testata_id' , session('testata_id'))->get())}}</span></a>
-        
+      <div class="col-3 d-flex justify-content-end align-items-center" >
         @if(Auth::user())
-           <a class="nav-link" href="{{ route('logout') }}"onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+           <a class="nav-link mx-3" href="{{ route('logout') }}"onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
             </form>
-          
-          @endif  
+        @endif  
+        @cannot('Gestore')
+          <a class="nav-link" href="{{route('carrello')}}"><i class="fa-solid fa-cart-shopping"></i><span> {{count(RicambioOrdinato::where('testata_id' , session('testata_id'))->get())}}</span></a>
+        @endcannot
       </div>
     </div>
   </div>
