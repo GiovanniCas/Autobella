@@ -1,13 +1,13 @@
 <x-layout>
     
     
-    <h1 class="text-center color-brown" style="margin-top:160px">Tutti i ricambi in un click!</h1>
+    <h1 class="text-center color-brown" style="margin-top:160px">{{__('profile.Tutti i ricambi in un click')}}!</h1>
     <div class=" container mt-5">
         <div class="row mt-5">
             <form method="post" action="{{route('cercaRicambiCompatibili')}}" class="d-flex mt-5">
                 @csrf
                 <div class="col-md-6 ">
-                    <h5>Marca :</h5>
+                    <h5>{{__('profile.Marca')}} :</h5>
                     @if(session('searchOrder'))
                         <input class="form-control me-2" type="search" placeholder="{{session()->get('cercaMarca')}}" aria-label="Search" name="cercaMarca">
                         @else
@@ -16,7 +16,7 @@
                 </div>
             
                 <div class="col-md-6">
-                    <h5>Modello :</h5>
+                    <h5>{{__('profile.Modello')}} :</h5>
                     @if(session('cercaModello'))
                         <input class="form-control me-2" type="search" placeholder="{{session()->get('cercaModello')}}" aria-label="Search" name="cercaModello">
                         @else

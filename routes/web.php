@@ -18,6 +18,9 @@ use App\Http\Controllers\Backend\FornitoriController;
     Route::get('/ordine' , [PublicController::class , "ordine"])->name("ordine");
     Route::post('/conferma/ordine' , [PublicController::class , "confermaOrdine"])->name("confermaOrdine");
     Route::get('/vista/dettaglio/{ricambio}' , [PublicController::class , "vistaDettaglio"])->name("vistaDettaglio");
+    //scelta lingua
+    Route::post('/locale/{locale}', [PublicController::class, "locale"])->name("locale");
+
 
 //i miei ordini (utente reistrato)
     Route::get('/storico/ordini' , [UserController::class , 'storicoOrdini'])->name('storicoOrdini');

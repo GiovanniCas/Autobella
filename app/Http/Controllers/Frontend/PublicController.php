@@ -12,6 +12,7 @@ use App\Models\Fornitore;
 use Illuminate\Http\Request;
 use App\Models\RicambioOrdinato;
 use App\Models\ModelloCompatibile;
+use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
 class PublicController extends Controller
 {
     public function welcome(){
+      
         $marche = Marca::all();
         return view('welcome', compact('marche'));
     }
@@ -199,6 +201,17 @@ class PublicController extends Controller
                 ->with(compact('visti_di_recente'))
                 ->with(compact('modelli_compatibili'));
     }
+
+    //scelta lingua
+    public function locale($locale)
+    {
+        
+        session()->put('locale', $locale);
+        App::setlocale(session('locale'));
+        
+        return redirect()->back();
+    }
+
 
     
     

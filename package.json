@@ -18,6 +18,8 @@
         "webpack-cli": "^4.10.0"
     },
     "dependencies": {
+        "flag-icon": "^2.5.0",
+        "flag-icon-css": "^4.1.7",
         "swiper": "^8.3.1",
         "webpack": "^5.73.0"
     }
