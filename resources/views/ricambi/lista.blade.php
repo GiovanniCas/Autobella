@@ -51,9 +51,8 @@
         </div>    
     </div>
     @guest
-        <div class="container mt-5">
-        
-            <div class="row">
+        <div class="container d-flex justify-content-between mt-5">
+            <div class="row ">
                 @foreach($ricambi as $ricambio)
                 <div class="col-12 col-sm-6 col-md-3">
                     <form action="{{route('aggiungiAlCarrello')}}" method="post" >
@@ -70,12 +69,9 @@
                                 <p class="card-title">${{$ricambio->prezzo}}</p>
                                 <p class="card-title">{{$ricambio->fornitori->ragione_sociale}}</p>
                                 <p class="card-title">{{$ricambio->categorie->descrizione}}</p>
-                                <!-- Button trigger modal -->
-
                                 <a class="btn btn-primary" href="{{route('vistaDettaglio' , compact('ricambio'))}}">
                                     Vai al Dettaglio
                                 </a>
-                                
                             </div>
                             <!-- <a class="aggiungi-al-carrello cart" type="submit" >Aggiungi al Carrello</a> -->
                             <!-- <div class="d-flex justify-content-between">

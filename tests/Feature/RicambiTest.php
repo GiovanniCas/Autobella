@@ -118,8 +118,9 @@ class RicambiTest extends TestCase
         
         // Storage::disk('avatars')->assertExists('avatar.jpg');
         $response= $this->actingAs($user)->get(route('vistaRicambi'));
-        $response->assertStatus(200);
-
+        $response->assertOk();
+        
+        // $response->assertSee('Gio crea prodotto');
 
         $response= $this->actingAs($user2)->post(route('aggiungiRicambi'));
         $response->assertStatus(403);

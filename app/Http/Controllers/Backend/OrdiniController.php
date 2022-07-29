@@ -14,7 +14,7 @@ class OrdiniController extends Controller
         if (Gate::denies('Gestore')) {
             abort(403);            
         } 
-
+        
         $ordini = Testata::where('stato' , '!=' , 0)->orderBy('data' , 'desc')->get();
         
         return view('listaOrdiniGestore.listaOrdini' , compact('ordini'));
