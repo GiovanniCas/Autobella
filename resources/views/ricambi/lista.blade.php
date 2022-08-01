@@ -51,7 +51,12 @@
         </div>    
     </div>
     @guest
-        <div class="container d-flex justify-content-between mt-5">
+        <div class="container  mt-5">
+            @if (session('message'))
+                <div class="alert alert-success d-flex" id="box-avviso" role="alert">
+                        {{ session('message') }}
+                </div>
+            @endif
             <div class="row ">
                 @foreach($ricambi as $ricambio)
                 <div class="col-12 col-sm-6 col-md-3">
@@ -93,7 +98,11 @@
     @endguest    
     @can('Utente')
         <div class="container mt-5">
-        
+            @if (session('message'))
+                <div class="alert alert-success d-flex" id="box-avviso" role="alert">
+                        {{ session('message') }}
+                </div>
+            @endif
             <div class="row">
                 @foreach($ricambi as $ricambio)
                 <div class="col-12 col-sm-6 col-md-3">
@@ -126,6 +135,14 @@
 
     @can('Gestore')
         <div class="container-fluid mt-5">
+            @if(count($ricambi_disabilitati))
+                <h4><a href="{{route('ricambiDisabilitati')}}"> Ricambi tolti dalla vendita = {{count($ricambi_disabilitati)}}</a></h4>
+            @endif
+            @if (session('message'))
+                <div class="alert alert-success d-flex" id="box-avviso" role="alert">
+                    {{ session('message') }}
+                </div>
+            @endif
             @if (session('error'))
                 @php 
                     $ricambio = session('ricambio')

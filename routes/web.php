@@ -24,12 +24,13 @@ use App\Http\Controllers\Backend\FornitoriController;
     Route::get('/language/{lang}', [LanguageController::class, "change"])->name('lang');
 
 
-//i miei ordini (utente reistrato)
+    //i miei ordini (utente reistrato)
     Route::get('/storico/ordini' , [UserController::class , 'storicoOrdini'])->name('storicoOrdini');
 
 
 
 Route::prefix('/admin')->group(function () {
+    
     //rotte per ricambi
     Route::get('/ricambi' , [FornitoriController::class , 'vistaRicambi'])->name('vistaRicambi');
     Route::get('/aggiungi/ricambio' , [FornitoriController::class , 'vistaAggiungiRicambi'])->name('vistaAggiungiRicambi');
@@ -43,6 +44,11 @@ Route::prefix('/admin')->group(function () {
     Route::delete('/elimina/modello/compatibile/{modello_compatibile}' , [FornitoriController::class , 'eliminaModelloCompatibile'])->name('eliminaModelloCompatibile');
     //disabilita ricambio
     Route::put('/disabilita/ricambio/{ricambio}' , [FornitoriController::class , 'disabilitaRicambio'])->name('disabilitaRicambio');
+    //vista ricambi disabilitati
+    Route::get('/ricambi/disabilitati' , [FornitoriController::class , 'ricambiDisabilitati'])->name('ricambiDisabilitati');
+    //riabilita ricambio
+    Route::put('/riabilita/ricambio/{ricambio_disabilitato}' , [FornitoriController::class , 'riabilitaRicambio'])->name('riabilitaRicambio');
+
 
 
     //rotte per fornitori

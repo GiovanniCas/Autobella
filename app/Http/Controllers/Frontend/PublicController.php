@@ -29,9 +29,14 @@ class PublicController extends Controller
             App::setlocale(Auth::user()->lingua);
             return view('welcome', compact('marche'));
 
+        }else{
+            if(session('locale')){
+                App::setLocale(session()->get('locale'));
+            }else{
+                App::setlocale('it');
+            }
         }
 
-        App::setlocale('it');
 
         return view('welcome', compact('marche'));
     }
@@ -173,12 +178,12 @@ class PublicController extends Controller
             'stato' => 1,
             'data' => date("Y-m-d"),
         ]);  
-        
+        session()->forget('testata_id');
        
         // session()->flush();
         
         
-        return redirect(route('welcome'));
+        return redirect(route('welcome'))->with("message" , "Grazie per averci scelto, il suo ordine è stato preso in carico!");
     }
        
 
@@ -219,8 +224,8 @@ class PublicController extends Controller
     {
         
         session()->put('locale', $locale);
-        App::setlocale(session('locale'));
-
+        App::setLocale(session()->get('locale'));
+       
         return redirect()->back();
     }
 

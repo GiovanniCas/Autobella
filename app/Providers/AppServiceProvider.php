@@ -31,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //Check for 'lang' cookie
         $cookie = Cookie::get('lang');
+        // dd($cookie);
         //Get visitors IP
         $ip = \Request::ip();
         //Get visitors Geo info based on his IP
@@ -65,14 +66,17 @@ class AppServiceProvider extends ServiceProvider
                 
                 //Set language based on value
                 App::setLocale($lang); 
+                
 
             }
             else {
                 //Set language for good measure
                 App::setLocale(App::getLocale()); 
+               
+
             }
         }
-        // $arr_ip = geoip()->getLocation('YOUR_IP_ADDRESS_HERE');
-        // dd($arr_ip);
     }
 }
+// $arr_ip = geoip()->getLocation('YOUR_IP_ADDRESS_HERE');
+// dd($arr_ip);

@@ -92,6 +92,7 @@ class FornitoriController extends Controller
         $immagini = Immagine::all();
         $ricambi = Ricambio::all()->where('stato' , Ricambio::STATO_ABILITATO);
         $fornitori = Fornitore::all();
+        $ricambi_disabilitati = Ricambio::where('stato', Ricambio::STATO_DISABILITATO)->get();
         
         //$modelli_compatibili = Ricambio::find(6)->modelli()->get();
         $cercaRicambio = session('cercaRicambio');
@@ -133,7 +134,9 @@ class FornitoriController extends Controller
 
         }
         
-
+        
+        
+        
         $modelli_compatibili = [];
         
         foreach ($ricambi as $ricambio) {
@@ -144,10 +147,45 @@ class FornitoriController extends Controller
             }
             
         }
-    
+        
+        if($ricambi->isEmpty()){
+            Session::flash('message' , 'Ops , non ci sono prodotti corrispondenti alla ricerca!');
+            
+            
+        }
         
         return view('ricambi.lista' , compact('ricambi'))->with(compact('fornitori'))->with(compact('modelli_compatibili'))
-                ->with(compact('immagini'));
+                ->with(compact('immagini'))->with(compact('ricambi_disabilitati'));
+    }
+
+    public function ricambiDisabilitati(){
+        
+        if (Gate::denies('Gestore')) {
+            abort(403);            
+        } 
+        $ricambi_disabilitati = Ricambio::where('stato', Ricambio::STATO_DISABILITATO)->get();
+
+        $modelli_compatibili = [];
+        
+        foreach ($ricambi_disabilitati as $ricambio_disabilitato) {
+            $modelli = Ricambio::find($ricambio_disabilitato->id)->modelli()->get();
+            
+            foreach($modelli as $modello) {
+                array_push($modelli_compatibili , $modello);
+            }
+            
+        }
+
+        return view('ricambi.ricambiDisabilitati' , compact('ricambi_disabilitati'))->with(compact('modelli_compatibili'));
+    }
+
+    public function riabilitaRicambio(Ricambio $ricambio_disabilitato){
+
+        $ricambio_disabilitato->stato = Ricambio::STATO_ABILITATO ;
+        $ricambio_disabilitato->save();
+
+        return redirect(route('ricambiDisabilitati'));
+
     }
 
     public function vistaAggiungiRicambi(){

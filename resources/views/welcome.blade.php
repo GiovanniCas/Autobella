@@ -3,6 +3,11 @@
     
     <h1 class="text-center color-brown" style="margin-top:160px">{{__('profile.Tutti i ricambi in un click')}}!</h1>
     <div class=" container mt-5">
+        @if (session('message'))
+            <div class="alert alert-success d-flex" id="box-avviso" role="alert">
+                    {{ session('message') }}
+            </div>
+        @endif
         <div class="row mt-5">
             <form method="post" action="{{route('cercaRicambiCompatibili')}}" class="d-flex mt-5">
                 @csrf
