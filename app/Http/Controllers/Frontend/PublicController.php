@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\User;
 use App\Models\Marca;
 use App\Models\Modello;
 use App\Models\Testata;
@@ -20,10 +21,21 @@ use Illuminate\Support\Facades\Auth;
 class PublicController extends Controller
 {
     public function welcome(){
-      
+       
+    
         $marche = Marca::all();
+        if(Auth::user()) {
+
+            App::setlocale(Auth::user()->lingua);
+            return view('welcome', compact('marche'));
+
+        }
+
+        App::setlocale('it');
+
         return view('welcome', compact('marche'));
     }
+
 
     public function cercaRicambiCompatibili(Request $request){
         //dd($request->all());
@@ -208,7 +220,7 @@ class PublicController extends Controller
         
         session()->put('locale', $locale);
         App::setlocale(session('locale'));
-        
+
         return redirect()->back();
     }
 

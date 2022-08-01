@@ -14,6 +14,8 @@
         'I Miei Ordini' => "I Miei Ordini",
         'Ordini' => "Ordini",
         'Fornitori' => "Fornitori",
+        'Inserisci Marca' => "Inserisci Marca",
+        'Inserisci Modello' => "Inserisci Modello",
 
     ];
 ?>

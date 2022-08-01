@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\Backend\OrdiniController;
 use App\Http\Controllers\Backend\VettureController;
 use App\Http\Controllers\Frontend\PublicController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\Backend\FornitoriController;
     Route::get('/vista/dettaglio/{ricambio}' , [PublicController::class , "vistaDettaglio"])->name("vistaDettaglio");
     //scelta lingua
     Route::post('/locale/{locale}', [PublicController::class, "locale"])->name("locale");
+    Route::get('/language/{lang}', [LanguageController::class, "change"])->name('lang');
 
 
 //i miei ordini (utente reistrato)

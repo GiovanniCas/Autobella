@@ -13,5 +13,7 @@
         'I Miei Ordini' => "My Orders",
         'Ordini' => "Orders List",
         'Fornitori' => "Providers",
+        'Inserisci Marca' => "Insert brand",
+        'Inserisci Modello' => "Insert model",
     ];
 ?>

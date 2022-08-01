@@ -11,7 +11,7 @@
                     @if(session('searchOrder'))
                         <input class="form-control me-2" type="search" placeholder="{{session()->get('cercaMarca')}}" aria-label="Search" name="cercaMarca">
                         @else
-                        <input class="form-control me-2" type="search" placeholder="Inserisci Marca" aria-label="Search" style="height: 40px; width: 100%;" name="cercaMarca">
+                        <input class="form-control me-2" type="search" placeholder="{{__('profile.Inserisci Marca')}}" aria-label="Search" style="height: 40px; width: 100%;" name="cercaMarca">
                     @endif 
                 </div>
             
@@ -20,7 +20,7 @@
                     @if(session('cercaModello'))
                         <input class="form-control me-2" type="search" placeholder="{{session()->get('cercaModello')}}" aria-label="Search" name="cercaModello">
                         @else
-                        <input class="form-control me-2" type="search" placeholder="Inserisci Modello" aria-label="Search" style="height: 40px; width: 100%;" name="cercaModello">
+                        <input class="form-control me-2" type="search" placeholder="{{__('profile.Inserisci Modello')}}" aria-label="Search" style="height: 40px; width: 100%;" name="cercaModello">
                     @endif 
                 </div>
                 

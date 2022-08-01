@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Middleware\SetLocale;
 use Illuminate\Support\Facades\App;
 
+
 class SetLocale
 {
     /**
@@ -18,11 +19,33 @@ class SetLocale
      */
     public function handle($request, Closure $next)
     {
-        $locale=session('locale', 'it');
+
+    
+
+       
         
-        App::setLocale($locale);
+        $locale = $request->getLocale();
+        if ($request->session()->has('locale')) {
+            $locale = $request->session()->get('locale');
+            App::setLocale($locale);
+        }else{
+            $locale = locale_accept_from_http($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+            App::setLocale($locale);
+        }
+
+        config(['app.locale' => $locale]);
+
+
         return $next($request);
-    
-    
+
+
+
+
+        // // dd($request->server('HTTP_ACCEPT_LANGUAGE'));
+        // $locale = session('locale');
+        
+        // App::setLocale($locale);
+
+        // return $next($request);   
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use Torann\GeoIP\Facades\GeoIP;
 use Illuminate\Support\Facades\Facade;
 
 return [
@@ -185,7 +186,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        \Torann\GeoIP\GeoIPServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -209,7 +210,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'ExampleClass' => App\Example\ExampleClass::class,
+        'GeoIP' => GeoIP::class,
     ])->toArray(),
 
 ];

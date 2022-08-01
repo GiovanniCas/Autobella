@@ -22,11 +22,13 @@ class User extends Authenticatable
         'email',
         'password',
         'ruolo',
+        'lingua',
     ];
 
     const GESTORE = 1;
     const UTENTE_NORMALE = 2;
-    
+
+
 
     /**
      * The attributes that should be hidden for serialization.
